@@ -1,0 +1,22 @@
+{
+  "collapse-filter": false,
+  "search": "path:god  ",
+  "showTags": false,
+  "showAttachments": false,
+  "hideUnresolved": false,
+  "showOrphans": true,
+  "collapse-color-groups": false,
+  "colorGroups": [],
+  "collapse-display": true,
+  "showArrow": true,
+  "textFadeMultiplier": -2.1,
+  "nodeSizeMultiplier": 0.758602150537634,
+  "lineSizeMultiplier": 5,
+  "collapse-forces": true,
+  "centerStrength": 0.720430107526882,
+  "repelStrength": 7.20430107526882,
+  "linkStrength": 0.661290322580645,
+  "linkDistance": 55,
+  "scale": 2.8265055138517092,
+  "close": false
+}
