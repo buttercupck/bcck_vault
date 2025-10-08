@@ -1,0 +1,196 @@
+---
+type: weekly-budget
+week: <% tp.date.now("YYYY-[W]WW") %>
+year: <% tp.date.now("YYYY") %>
+week-start: <% tp.date.now("YYYY-MM-DD", 0, tp.date.now("dddd") === "Monday" ? "YYYY-MM-DD" : "YYYY-MM-DD", -7) %>
+week-end: <% tp.date.now("YYYY-MM-DD", 6, tp.date.now("dddd") === "Monday" ? "YYYY-MM-DD" : "YYYY-MM-DD", -1) %>
+created: <% tp.date.now("YYYY-MM-DD HH:mm") %>
+status: active
+groceries-budget: 0
+groceries-actual: 0
+gas-budget: 0
+gas-actual: 0
+misc-budget: 0
+misc-actual: 0
+total-weekly-budget: 0
+---
+
+# Budget: Week <% tp.date.now("WW") %> - <% tp.date.now("YYYY") %>
+
+**Period:** <% tp.date.now("MMM DD") %> - <% tp.date.now("MMM DD", 6) %>
+
+---
+
+## 💰 Income This Week
+
+### Hours Worked
+- **Hours:** 0
+- **Hourly Rate:** $0
+- **Gross Pay:** $0.00
+
+**Future:** This will sync from Toggl API automatically
+
+---
+
+## 📋 Bills Due This Week (Auto-Calculated)
+
+```dataviewjs
+// Get today's date
+const today = dv.date("today");
+const currentDay = today.day;
+const startOfWeek = currentDay - (currentDay % 7) + 1;
+const endOfWeek = startOfWeek + 6;
+
+// Query bills due this week
+const bills = dv.pages('"SYSTEM/budget/bills"')
+    .where(p => p.type === "bill")
+    .where(b => b["due-date"] >= startOfWeek && b["due-date"] <= endOfWeek)
+    .sort(p => p["due-date"], 'asc');
+
+if (bills.length === 0) {
+    dv.paragraph("✅ **No bills due this week!**");
+} else {
+    let total = 0;
+    for (let bill of bills) {
+        const name = bill["bill-name"];
+        const amount = bill.amount || 0;
+        const dueDate = bill["due-date"];
+        const autoPay = bill["auto-pay"] ? "🔄 Auto-Pay" : "💳 Manual";
+        total += amount;
+        dv.paragraph(`- [ ] **${name}** - $${amount.toFixed(2)} (Due: Day ${dueDate}) - ${autoPay}`);
+    }
+    dv.paragraph(`\n**Total Due:** $${total.toFixed(2)}`);
+}
+```
+
+---
+
+### ✅ Manual Payment Tracking
+
+**Copy unchecked bills from above and check off as you pay them:**
+
+- [ ] Bill Name - $0.00 (Due: Day X)
+- [ ] Bill Name - $0.00 (Due: Day X)
+
+**Total Paid This Week:** $0.00
+
+---
+
+## 🛒 Weekly Budget Categories
+
+**Instructions:** Update budget/actual amounts in frontmatter at top of file
+
+```dataviewjs
+const page = dv.current();
+
+const groceriesBudget = page["groceries-budget"] || 0;
+const groceriesActual = page["groceries-actual"] || 0;
+const gasBudget = page["gas-budget"] || 0;
+const gasActual = page["gas-actual"] || 0;
+const miscBudget = page["misc-budget"] || 0;
+const miscActual = page["misc-actual"] || 0;
+
+const totalBudget = groceriesBudget + gasBudget + miscBudget;
+const totalActual = groceriesActual + gasActual + miscActual;
+const totalRemaining = totalBudget - totalActual;
+
+dv.header(3, "Groceries");
+dv.paragraph(`- **Budgeted:** $${groceriesBudget.toFixed(2)}`);
+dv.paragraph(`- **Actual:** $${groceriesActual.toFixed(2)}`);
+dv.paragraph(`- **Remaining:** $${(groceriesBudget - groceriesActual).toFixed(2)}`);
+
+dv.header(3, "Gas/Transportation");
+dv.paragraph(`- **Budgeted:** $${gasBudget.toFixed(2)}`);
+dv.paragraph(`- **Actual:** $${gasActual.toFixed(2)}`);
+dv.paragraph(`- **Remaining:** $${(gasBudget - gasActual).toFixed(2)}`);
+
+dv.header(3, "Miscellaneous");
+dv.paragraph(`- **Budgeted:** $${miscBudget.toFixed(2)}`);
+dv.paragraph(`- **Actual:** $${miscActual.toFixed(2)}`);
+dv.paragraph(`- **Remaining:** $${(miscBudget - miscActual).toFixed(2)}`);
+
+dv.paragraph("---");
+dv.paragraph(`**Total Budget:** $${totalBudget.toFixed(2)}`);
+dv.paragraph(`**Total Spent:** $${totalActual.toFixed(2)}`);
+dv.paragraph(`**Remaining:** $${totalRemaining.toFixed(2)}`);
+
+if (totalRemaining < 0) {
+    dv.paragraph(`⚠️ **Over budget by $${Math.abs(totalRemaining).toFixed(2)}**`);
+} else if (totalRemaining === 0) {
+    dv.paragraph(`✅ **On budget!**`);
+} else {
+    dv.paragraph(`✅ **Under budget by $${totalRemaining.toFixed(2)}**`);
+}
+```
+
+---
+
+## 💳 Account Balances
+
+**Quick Reference from [[SYSTEM/budget/accounts|accounts.md]]:**
+
+- **Checking 1:** $0.00
+- **Checking 2:** $0.00
+- **CC1 Balance:** $0.00
+- **CC2 Balance:** $0.00
+
+---
+
+## 🧮 Money Flow Calculator
+
+```
+Gross Pay:           $0.00
+- Bills Due:         $0.00
+- Weekly Budget:     $0.00
+─────────────────────────
+= Left Over:         $0.00
+```
+
+### 💸 Debt Paydown This Week
+
+**Amount to Credit Cards:** $0.00
+
+**Distribution:**
+- CC1 Payment: $0.00
+- CC2 Payment: $0.00
+
+---
+
+## 📊 Week Summary
+
+### Financial Health Check
+- ✅ All bills paid?
+- ✅ Stayed within budget?
+- ✅ Sent extra to debt?
+
+### Notes
+-
+
+---
+
+## Quick Decision Helper
+
+**Can I afford this purchase?**
+
+1. Current checking balance: $0.00
+2. Unpaid bills this week: $0.00
+3. Weekly budget remaining: $0.00
+4. **Available for discretionary:** $0.00
+
+---
+
+## Future Automation Hooks
+
+**This template is ready for:**
+- Toggl API: Replace manual hours with `{{toggl.hours}}` variable
+- Auto-bill population: Dataview query pulls bills based on week number
+- Account sync: Real-time balance updates from bank APIs
+- Debt calculator: Auto-distribute leftover funds based on avalanche/snowball method
+- Tracker graphs: Week-over-week spending patterns
+
+**Metadata structure supports:**
+- Dataview aggregation across weeks
+- Monthly rollup reports
+- Trend analysis
+- Goal tracking
+
