@@ -6,12 +6,12 @@ This guide sets up Git version control on your 3 desktop devices while keeping S
 ## Part 1: Main Mac (Current Device) - ALREADY DONE ✅
 
 Your main Mac (Desktop vault) is already configured with:
-- ✅ Git initialized at `~/Desktop/v1_self_vault`
+- ✅ Git initialized at `~/Desktop/bcck_vault`
 - ✅ .gitignore created
 - ✅ Initial commit made
 - ✅ Pushed to: `https://github.com/buttercupck/bcck_vault.git`
 
-**Working Directory**: `~/Desktop/v1_self_vault`
+**Working Directory**: `~/Desktop/bcck_vault`
 
 ## Part 2: Add Sync Alias (All 3 Desktop Devices)
 
@@ -19,7 +19,7 @@ Add this to your `~/.zshrc` or `~/.bashrc`:
 
 ```bash
 # Obsidian vault sync alias
-alias vsync='cd ~/Desktop/v1_self_vault && git add . && git commit -m "sync: $(hostname) $(date +%Y-%m-%d_%H:%M)" && git pull --rebase && git push'
+alias vsync='cd ~/Desktop/bcck_vault && git add . && git commit -m "sync: $(hostname) $(date +%Y-%m-%d_%H:%M)" && git pull --rebase && git push'
 ```
 
 Then reload:
@@ -36,10 +36,10 @@ source ~/.zshrc
 ```bash
 # 1. Clone the repository
 cd ~/Desktop
-git clone https://github.com/buttercupck/bcck_vault.git v1_self_vault
+git clone https://github.com/buttercupck/bcck_vault.git bcck_vault
 
 # 2. Open Obsidian and point it to the cloned vault
-# File → Open Vault → ~/Desktop/v1_self_vault
+# File → Open Vault → ~/Desktop/bcck_vault
 
 # 3. Install Remotely Save plugin in Obsidian
 # 4. Configure same S3 credentials as other devices
@@ -53,7 +53,7 @@ If vault already exists on the device via S3 sync:
 
 ```bash
 # 1. Navigate to vault
-cd /Users/itza/Documents/vault_self/v1_self_vault
+cd /Users/itza/Documents/vault_self/bcck_vault
 
 # 2. Check git status
 git status
@@ -89,7 +89,7 @@ vsync  # Commits and pushes your changes
 
 **Or manually:**
 ```bash
-cd /Users/itza/Documents/vault_self/v1_self_vault
+cd /Users/itza/Documents/vault_self/bcck_vault
 git pull
 # ... work in Obsidian ...
 git add .
@@ -179,7 +179,7 @@ git pull  # Get latest from Git
 vsync
 
 # Check status
-cd /Users/itza/Documents/vault_self/v1_self_vault && git status
+cd /Users/itza/Documents/vault_self/bcck_vault && git status
 
 # View recent commits
 git log --oneline -5
