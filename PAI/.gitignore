@@ -14,10 +14,6 @@ Library
 .env.*.local
 *.env
 
-# Claude Code directories with personal context and secrets
-PAI_DIRECTORY/
-.claude/
-
 # API keys and secrets
 *.pem
 *.key

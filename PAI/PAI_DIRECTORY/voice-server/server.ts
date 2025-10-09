@@ -1,6 +1,7 @@
 #!/usr/bin/env bun
 /**
- * PAIVoice - Personal AI Voice notification server using ElevenLabs TTS
+ * PAIVoice - Personal AI Voice notification server using macOS native voices
+ * Zero-cost, offline, premium quality text-to-speech
  */
 
 import { serve } from "bun";
@@ -9,28 +10,45 @@ import { homedir } from "os";
 import { join } from "path";
 import { existsSync } from "fs";
 
-// Load .env from user home directory
-const envPath = join(homedir(), '.env');
+// Load .env from PAI_DIR if available
+const paiDir = process.env.PAI_DIR || join(homedir(), '.claude');
+const envPath = join(paiDir, '.env');
 if (existsSync(envPath)) {
   const envContent = await Bun.file(envPath).text();
   envContent.split('\n').forEach(line => {
     const [key, value] = line.split('=');
     if (key && value && !key.startsWith('#')) {
-      process.env[key.trim()] = value.trim();
+      process.env[key.trim()] = value.trim().replace(/^["']|["']$/g, '');
     }
   });
 }
 
-const PORT = parseInt(process.env.PORT || "8888");
-const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
+// Load voice configuration
+const voicesConfigPath = join(paiDir, 'voice-server', 'voices.json');
+let voicesConfig: any = {
+  default_rate: 175,
+  voices: {
+    chavvo: {
+      voice_name: "Jamie",
+      rate_multiplier: 1.3,
+      rate_wpm: 228,
+      description: "UK Male - Professional, conversational",
+      type: "Premium"
+    }
+  }
+};
 
-if (!ELEVENLABS_API_KEY) {
-  console.error('⚠️  ELEVENLABS_API_KEY not found in ~/.env');
-  console.error('Add: ELEVENLABS_API_KEY=your_key_here');
+if (existsSync(voicesConfigPath)) {
+  try {
+    voicesConfig = await Bun.file(voicesConfigPath).json();
+  } catch (error) {
+    console.warn('⚠️  Could not load voices.json, using defaults');
+  }
 }
 
-// Default voice ID (Kai's voice)
-const DEFAULT_VOICE_ID = process.env.ELEVENLABS_VOICE_ID || "s3TPKV1kjDlVtZbl4Ksh";
+const PORT = parseInt(process.env.PORT || "8888");
+const DEFAULT_VOICE = voicesConfig.voices.chavvo?.voice_name || "Jamie";
+const DEFAULT_RATE = voicesConfig.voices.chavvo?.rate_wpm || 228;
 
 // Sanitize input for shell commands
 function sanitizeForShell(input: string): string {
@@ -62,62 +80,25 @@ function validateInput(input: any): { valid: boolean; error?: string } {
   return { valid: true };
 }
 
-// Generate speech using ElevenLabs API
-async function generateSpeech(text: string, voiceId: string): Promise<ArrayBuffer> {
-  if (!ELEVENLABS_API_KEY) {
-    throw new Error('ElevenLabs API key not configured');
-  }
-
-  const url = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`;
-
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Accept': 'audio/mpeg',
-      'Content-Type': 'application/json',
-      'xi-api-key': ELEVENLABS_API_KEY,
-    },
-    body: JSON.stringify({
-      text: text,
-      model_id: 'eleven_monolingual_v1',
-      voice_settings: {
-        stability: 0.5,
-        similarity_boost: 0.5,
-      },
-    }),
-  });
-
-  if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`ElevenLabs API error: ${response.status} - ${errorText}`);
-  }
-
-  return await response.arrayBuffer();
-}
-
-// Play audio using afplay (macOS)
-async function playAudio(audioBuffer: ArrayBuffer): Promise<void> {
-  const tempFile = `/tmp/voice-${Date.now()}.mp3`;
-
-  // Write audio to temp file
-  await Bun.write(tempFile, audioBuffer);
-
+// Generate speech using macOS native say command
+function speakText(text: string, voiceName: string = DEFAULT_VOICE, rate: number = DEFAULT_RATE): Promise<void> {
   return new Promise((resolve, reject) => {
-    const proc = spawn('/usr/bin/afplay', [tempFile]);
+    // Clean the voice name (remove Premium/Enhanced suffix if present)
+    const cleanVoiceName = voiceName.replace(/\s*\((Premium|Enhanced)\)/i, '').trim();
+
+    const args = ['-v', cleanVoiceName, '-r', rate.toString(), text];
+    const proc = spawn('/usr/bin/say', args);
 
     proc.on('error', (error) => {
-      console.error('Error playing audio:', error);
+      console.error('Error with text-to-speech:', error);
       reject(error);
     });
 
     proc.on('exit', (code) => {
-      // Clean up temp file
-      spawn('/bin/rm', [tempFile]);
-
       if (code === 0) {
         resolve();
       } else {
-        reject(new Error(`afplay exited with code ${code}`));
+        reject(new Error(`say command exited with code ${code}`));
       }
     });
   });
@@ -148,7 +129,8 @@ async function sendNotification(
   title: string,
   message: string,
   voiceEnabled = true,
-  voiceId: string | null = null
+  voiceName: string | null = null,
+  rate: number | null = null
 ) {
   // Validate inputs
   const titleValidation = validateInput(title);
@@ -166,16 +148,15 @@ async function sendNotification(
   const safeTitle = sanitizeForShell(title);
   const safeMessage = sanitizeForShell(message);
 
-  // Generate and play voice using ElevenLabs
-  if (voiceEnabled && ELEVENLABS_API_KEY) {
+  // Speak the message using macOS native voice
+  if (voiceEnabled) {
     try {
-      const voice = voiceId || DEFAULT_VOICE_ID;
-      console.log(`🎙️  Generating speech with ElevenLabs (voice: ${voice})`);
-
-      const audioBuffer = await generateSpeech(safeMessage, voice);
-      await playAudio(audioBuffer);
+      const voice = voiceName || DEFAULT_VOICE;
+      const speechRate = rate || DEFAULT_RATE;
+      console.log(`🎙️  Speaking with macOS voice: ${voice} at ${speechRate} wpm`);
+      await speakText(safeMessage, voice, speechRate);
     } catch (error) {
-      console.error("Failed to generate/play speech:", error);
+      console.error("Failed to speak text:", error);
     }
   }
 
@@ -244,15 +225,16 @@ const server = serve({
         const title = data.title || "PAI Notification";
         const message = data.message || "Task completed";
         const voiceEnabled = data.voice_enabled !== false;
-        const voiceId = data.voice_id || data.voice_name || null; // Support both voice_id and voice_name
+        const voiceName = data.voice_name || null;
+        const rate = data.rate || null;
 
-        if (voiceId && typeof voiceId !== 'string') {
-          throw new Error('Invalid voice_id');
+        if (voiceName && typeof voiceName !== 'string') {
+          throw new Error('Invalid voice_name');
         }
 
-        console.log(`📨 Notification: "${title}" - "${message}" (voice: ${voiceEnabled}, voiceId: ${voiceId || DEFAULT_VOICE_ID})`);
+        console.log(`📨 Notification: "${title}" - "${message}" (voice: ${voiceEnabled}, voice: ${voiceName || DEFAULT_VOICE})`);
 
-        await sendNotification(title, message, voiceEnabled, voiceId);
+        await sendNotification(title, message, voiceEnabled, voiceName, rate);
 
         return new Response(
           JSON.stringify({ status: "success", message: "Notification sent" }),
@@ -281,7 +263,7 @@ const server = serve({
 
         console.log(`🤖 PAI notification: "${title}" - "${message}"`);
 
-        await sendNotification(title, message, true, null);
+        await sendNotification(title, message, true, null, null);
 
         return new Response(
           JSON.stringify({ status: "success", message: "PAI notification sent" }),
@@ -307,9 +289,9 @@ const server = serve({
         JSON.stringify({
           status: "healthy",
           port: PORT,
-          voice_system: "ElevenLabs",
-          default_voice_id: DEFAULT_VOICE_ID,
-          api_key_configured: !!ELEVENLABS_API_KEY
+          voice_system: "macOS Native",
+          default_voice: DEFAULT_VOICE,
+          default_rate: DEFAULT_RATE
         }),
         {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -326,7 +308,7 @@ const server = serve({
 });
 
 console.log(`🚀 PAIVoice Server running on port ${PORT}`);
-console.log(`🎙️  Using ElevenLabs TTS (default voice: ${DEFAULT_VOICE_ID})`);
+console.log(`🎙️  Using macOS native voices (default: ${DEFAULT_VOICE})`);
 console.log(`📡 POST to http://localhost:${PORT}/notify`);
 console.log(`🔒 Security: CORS restricted to localhost, rate limiting enabled`);
-console.log(`🔑 API Key: ${ELEVENLABS_API_KEY ? '✅ Configured' : '❌ Missing'}`);
+console.log(`💰 Zero cost - 100% offline - Complete privacy`);

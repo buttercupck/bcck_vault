@@ -19,7 +19,7 @@ Don't use fetch to research things, use `${PAI_DIR}/commands/web-research.md` in
 
 ## 🚨🚨🚨 CHROME DEVTOOLS MCP - FOR ALL WEB BROWSING & TESTING 🚨🚨🚨
 
-**THESE ARE YOUR EYES, Kai!**
+**THESE ARE YOUR EYES, Chavvo!**
 
 **USE THIS FOR EVERYTHING WEB-BASED:**
 - Opening web pages

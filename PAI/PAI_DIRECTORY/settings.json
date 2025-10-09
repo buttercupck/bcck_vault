@@ -3,8 +3,10 @@
   "env": {
     "MCP_API_KEY": "REDACTED",
     "DISABLE_INTERLEAVED_THINKING": "true",
-    "DA": "Kai",
-    "PAI_DIR": "/Users/daniel/.claude"
+    "DA": "Chavvo",
+    "SUPABASE_URL": "https://anqfdvyhexpxdpgbkgmd.supabase.co",
+    "SUPABASE_PROJECT_REF": "anqfdvyhexpxdpgbkgmd",
+    "SUPABASE_ACCESS_TOKEN": "sbp_87492815e58c3ea2c9f5a8793d2854e297fa7a89"
   },
   "permissions": {
     "allow": [
@@ -41,6 +43,19 @@
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [],
   "mcpServers": {
+    "supabase-interlingo": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@supabase/mcp-server-supabase@latest",
+        "--project-ref",
+        "anqfdvyhexpxdpgbkgmd"
+      ],
+      "env": {
+        "SUPABASE_ACCESS_TOKEN": "${SUPABASE_ACCESS_TOKEN}"
+      },
+      "description": "Interlingo Supabase database access for jobs, interpreters, and communication management"
+    },
     "httpx": {
       "type": "http",
       "description": "Use for getting information on web servers or site stack information, like what tech stack a given website is running, and other similar use cases.",

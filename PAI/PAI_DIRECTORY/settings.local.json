@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/itza/Desktop/JPeptics/**)",
+      "Read(//Users/itza/Documents/vault_self/bcck_vault/INCOME/JPeptics/**)",
+      "Read(//Users/itza/Documents/vault_self/bcck_vault/Daily Notes/**)",
+      "Read(//Users/itza/Documents/vault_self/bcck_vault/**)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Read(//Users/itza/Documents/vault_self/bcck_vault/**)"
+    ],
+    "deny": [],
+    "ask": []
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "supabase-interlingo",
+    "github"
+  ]
+}

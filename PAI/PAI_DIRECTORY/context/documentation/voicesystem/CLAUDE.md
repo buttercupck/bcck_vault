@@ -3,7 +3,7 @@
 Each agent has a unique macOS Premium or Enhanced voice for the notification system, creating distinct personalities through natural-sounding neural TTS voices.
 
 **Voice Mappings (macOS Native):**
-- **Kai (Main Agent)**: Jamie (Premium) - UK Male - Professional, conversational
+- **Chavvo (Main Agent)**: Jorge (Enhanced) - Spanish Male - Friendly, conversational
 - **Researcher Agent**: Ava (Premium) - US Female - Analytical, highest quality
 - **Designer Agent**: Isha (Premium) - Indian Female - Creative, distinct
 - **Engineer Agent**: Tom (Enhanced) - US Male - Steady, professional
@@ -16,7 +16,7 @@ Each agent has a unique macOS Premium or Enhanced voice for the notification sys
 - Uses macOS native Premium and Enhanced neural voices
 - Zero API costs, complete privacy, 100% offline
 - Customizable speech rates per agent (configured via rate_multiplier)
-- Default speeds: Kai at 228 wpm (1.3x), agents at 236 wpm (1.35x)
+- Default speeds: Chavvo at 175 wpm (1.0x), agents at 236 wpm (1.35x)
 
 **Voice Completion Format:**
 

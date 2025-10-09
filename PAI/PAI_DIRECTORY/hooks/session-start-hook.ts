@@ -50,11 +50,11 @@ async function testStopHook() {
 
     console.error('✅ Stop-hook found and is executable');
 
-    // Set initial tab title to show session started with Kai ready
-    process.stderr.write('\x1b]0;Kai Ready\x07');
-    process.stderr.write('\x1b]2;Kai Ready\x07');
-    process.stderr.write('\x1b]30;Kai Ready\x07');
-    console.error('📍 Set initial tab title: "Kai Ready"');
+    // Set initial tab title to show session started with Chavvo ready
+    process.stderr.write('\x1b]0;Chavvo Ready\x07');
+    process.stderr.write('\x1b]2;Chavvo Ready\x07');
+    process.stderr.write('\x1b]30;Chavvo Ready\x07');
+    console.error('📍 Set initial tab title: "Chavvo Ready"');
 
     return true;
   } catch (e) {
@@ -68,7 +68,7 @@ async function main() {
     // Test stop-hook first
     const stopHookOk = await testStopHook();
 
-    const daName = process.env.DA || 'Kai';
+    const daName = process.env.DA || 'Chavvo';
     const message = `${daName} here, ready to go.`;
 
     if (!stopHookOk) {
