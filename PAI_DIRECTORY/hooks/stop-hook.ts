@@ -155,7 +155,7 @@ try {
   VOICE_CONFIG = {
     default_rate: 175,
     voices: {
-      kai: { voice_name: "Jamie (Premium)", rate_wpm: 263, rate_multiplier: 1.5, description: "UK Male", type: "Premium" },
+      chavvo: { voice_name: "Jamie (Premium)", rate_wpm: 263, rate_multiplier: 1.5, description: "UK Male", type: "Premium" },
       researcher: { voice_name: "Ava (Premium)", rate_wpm: 236, rate_multiplier: 1.35, description: "US Female", type: "Premium" },
       engineer: { voice_name: "Tom (Enhanced)", rate_wpm: 236, rate_multiplier: 1.35, description: "US Male", type: "Enhanced" },
       architect: { voice_name: "Serena (Premium)", rate_wpm: 236, rate_multiplier: 1.35, description: "UK Female", type: "Premium" },
@@ -359,7 +359,7 @@ async function main() {
 
   // Generate the announcement
   let message = '';
-  let voiceConfig = VOICE_CONFIG.voices.kai; // Default to Kai's voice config
+  let voiceConfig = VOICE_CONFIG.voices.chavvo; // Default to Kai's voice config
   let kaiHasCustomCompleted = false;
 
   // ALWAYS check Kai's response FIRST (even when agents are used)
@@ -433,7 +433,7 @@ async function main() {
       const wordCount = customText.split(/\s+/).length;
       if (customText && wordCount <= 8) {
         message = customText;
-        voiceConfig = VOICE_CONFIG.voices[agentType.toLowerCase()] || VOICE_CONFIG.voices.kai;
+        voiceConfig = VOICE_CONFIG.voices[agentType.toLowerCase()] || VOICE_CONFIG.voices.chavvo;
         console.error(`🗣️ AGENT CUSTOM VOICE (fallback): ${message}`);
       } else {
         // Custom completed too long, fall back to regular COMPLETED
@@ -444,7 +444,7 @@ async function main() {
             .replace(/\[AGENT:\w+\]\s*/i, '')
             .trim();
           message = generateIntelligentResponse(lastUserQuery, taskResult, completedText);
-          voiceConfig = VOICE_CONFIG.voices[agentType.toLowerCase()] || VOICE_CONFIG.voices.kai;
+          voiceConfig = VOICE_CONFIG.voices[agentType.toLowerCase()] || VOICE_CONFIG.voices.chavvo;
           console.error(`🎯 AGENT FALLBACK (custom too long): ${message}`);
         }
       }
@@ -464,7 +464,7 @@ async function main() {
 
         // Generate intelligent response for agent tasks
         message = generateIntelligentResponse(lastUserQuery, taskResult, completedText);
-        voiceConfig = VOICE_CONFIG.voices[agentType.toLowerCase()] || VOICE_CONFIG.voices.kai;
+        voiceConfig = VOICE_CONFIG.voices[agentType.toLowerCase()] || VOICE_CONFIG.voices.chavvo;
 
         console.error(`🎯 AGENT INTELLIGENT (fallback): ${message}`);
       }
