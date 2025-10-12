@@ -1,0 +1,108 @@
+-- SYSTEM COMPUTER SETTINGS --
+sudo reboot
+
+sudo apt update
+sudo apt upgrade
+
+nano --same
+- Reload
+source ~/.zshrc
+vim ~/.zshrc
+
+lsn ## Numbered list
+
+mv old_name.txt new_name.txt
+
+ls
+_missions               katana-linux-amd64.tar.gz  reconlab
+buttercup               mitmproxy-ca-cert.pem      v2
+buttercup_recon.sqlite  notion_reportout.py        venv_0
+go
+
+
+1. Navigation
+-------------
+cd [folder]        # Change directory
+cd ..              # Up one directory
+cd ~               # Go to home
+pwd                # Print current directory
+ls -la             # List all files (long format)
+
+2. Files & Folders
+------------------
+mkdir [folder]     # Make new folder
+rm [file]          # Delete file
+rm -r [folder]     # Delete folder recursively
+rm -rf /path/to/directory ## Delete whole Directory and everything inside without asking for permission.
+
+
+touch [file]       # Create new file
+mv [old] [new]     # Move or rename
+cp [src] [dst]     # Copy file or folder
+
+3. File Inspection
+------------------
+cat [file]         # Show contents
+less [file]        # Scroll through file
+head -n 20 [file]  # First 20 lines
+tail -n 20 [file]  # Last 20 lines
+
+Tmux commands
+
+Ctrl + B then press " #split vertically
+Ctrl + B THEN up arrow
+
+# === STOP PYTHON HTTP SERVER ===
+# (In the tmux top pane or terminal running the server)
+Ctrl + C
+
+# === EXIT VIRTUAL ENVIRONMENT ===
+deactivate
+
+# === DETACH TMUX SESSION (optional) ===
+# If you're still inside tmux
+Ctrl + B then D
+
+# === FULLY TERMINATE TMUX SESSION (optional) ===
+tmux kill-session -t buttercup-lab
+
+
+
+
+
+
+
+
+
+
+4. Search & Filters
+-------------------
+grep "text" [file]       # Find text in file
+grep -r "text" [dir]     # Recursive search
+find . -name "*.js"      # Find JS files
+
+5. Networking
+-------------
+curl -I [url]            # HTTP headers
+curl -X POST -d ...      # Custom request
+ping [host]              # Ping test
+netstat -tulnp           # Open ports
+
+6. Permissions
+--------------
+chmod +x [file]          # Make executable
+chown user:group [file]  # Change ownership
+
+7. Process & System
+-------------------
+ps aux                   # List processes
+top                      # Live system monitor
+kill [PID]               # Kill process
+df -h                    # Disk usage
+du -sh *                 # Folder sizes
+
+8. Useful Bug Bounty Tools
+--------------------------
+ffuf -w wordlist.txt -u https://site.com/FUZZ     # Directory fuzzing
+subfinder -d domain.com                           # Subdomain enum
+httpx -l urls.txt -mc 200                         # Probes for HTTP status
