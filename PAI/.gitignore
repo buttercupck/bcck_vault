@@ -1,5 +1,29 @@
-# macOS
+# =========================
+# Combined .gitignore
+# =========================
+
+# Obsidian workspace files (device-specific)
+.obsidian/workspace*.json
+.obsidian/workspaces.json
+
+# Cache and temporary files
+.obsidian/cache/
+.trash/
 .DS_Store
+
+# Plugin data that shouldn't be synced
+.obsidian/plugins/remotely-save/
+.obsidian/plugins/obsidian-local-rest-api/
+.obsidian/plugins/google-drive-sync/
+
+# Sensitive files
+**/api_keys.md
+ssh_keys
+ssh_keys.pub
+*.pem
+*.key
+
+# macOS
 .AppleDouble
 .LSOverride
 Icon
@@ -15,8 +39,6 @@ Library
 *.env
 
 # API keys and secrets
-*.pem
-*.key
 *.cert
 *.p12
 *.pfx
