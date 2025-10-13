@@ -1,1 +1,0 @@
-Can we really put trust in the bible?

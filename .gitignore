@@ -83,3 +83,14 @@ out/
 private/
 secrets/
 credentials/
+
+# Vault root folders that should not be in PAI
+Daily Notes/
+LEARNING/
+INBOX/
+INCOME/
+SPIRITUAL/
+SYSTEM/
+TELOS/
+YO/
+chavvo/
