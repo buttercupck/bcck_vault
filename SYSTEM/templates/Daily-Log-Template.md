@@ -1,0 +1,11 @@
+---
+date: <% tp.date.now("YYYY-MM-DD") %>
+type: daily-log
+aliases:
+  - <% tp.date.now("MMMDD") %>
+tags:
+  - daily-log
+---
+
+## First thing:
+---

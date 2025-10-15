@@ -1,0 +1,14 @@
+{
+  "disabledMcpjsonServers": [
+    "httpx",
+    "content",
+    "daemon",
+    "Foundry",
+    "naabu",
+    "brightdata",
+    "stripe",
+    "Ref",
+    "apify",
+    "playwright"
+  ]
+}
