@@ -1,0 +1,10 @@
+.obsidian/workspace
+.obsidian/workspaces.json 
+.obsidian/backups/ 
+.obsidian/sync-history/ 
+.obsidian/plugins/*/data.json 
+.obsidian/plugins/*/main.js 
+.obsidian/plugins/*/manifest.json 
+.obsidian/cache/ 
+.obsidian/vault.config/ 
+.DS_Store
