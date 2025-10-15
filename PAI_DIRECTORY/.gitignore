@@ -1,9 +1,0 @@
-# Device-specific configuration files
-settings.local.json
-.env
-
-# System files
-.DS_Store
-
-# Logs
-*.log
