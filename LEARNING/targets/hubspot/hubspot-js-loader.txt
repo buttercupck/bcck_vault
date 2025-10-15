@@ -1,0 +1,657 @@
+[
+  {
+    "type": "CDN",
+    "indicator": "//static.hsappstatic.net",
+    "host_or_service": "static.hsappstatic.net",
+    "notes": "HubSpot's static asset and CDN domain."
+  },
+  {
+    "type": "API",
+    "indicator": "hub-http",
+    "host_or_service": "HubSpot internal API",
+    "notes": "Likely a core internal HTTP client for interacting with various HubSpot backend services."
+  },
+  {
+    "type": "API",
+    "indicator": "hubspot-url-utils",
+    "host_or_service": "HubSpot internal",
+    "notes": "Utility for handling HubSpot-specific URLs, possibly including API endpoint construction."
+  },
+  {
+    "type": "Integration",
+    "indicator": "ably",
+    "host_or_service": "Ably",
+    "notes": "Realtime messaging and communication service integration."
+  },
+  {
+    "type": "API",
+    "indicator": "rpc-client-utils",
+    "host_or_service": "HubSpot internal RPC",
+    "notes": "Utilities for making Remote Procedure Calls within the HubSpot infrastructure."
+  },
+  {
+    "type": "Integration",
+    "indicator": "wootric-nps",
+    "host_or_service": "Wootric",
+    "notes": "Net Promoter Score (NPS) and customer feedback service integration."
+  },
+  {
+    "type": "Integration",
+    "indicator": "crosstab",
+    "host_or_service": "Crosstab",
+    "notes": "Library for communication between browser tabs/windows."
+  },
+  {
+    "type": "Analytics",
+    "indicator": "metrics-js",
+    "host_or_service": "HubSpot internal analytics",
+    "notes": "Library for tracking and reporting internal application metrics."
+  },
+  {
+    "type": "Auth",
+    "indicator": "PortalIdParser",
+    "host_or_service": "HubSpot internal authentication/context",
+    "notes": "Utility for parsing or accessing the current HubSpot portal ID, relevant for authenticated requests."
+  },
+  {
+    "type": "Error Tracking",
+    "indicator": "raven",
+    "host_or_service": "Sentry (formerly Raven)",
+    "notes": "Error tracking and reporting service integration."
+  },
+  {
+    "type": "Error Tracking",
+    "indicator": "raven-hubspot",
+    "host_or_service": "Sentry (HubSpot specific)",
+    "notes": "HubSpot's specific integration with Sentry for error reporting."
+  },
+  {
+    "type": "API",
+    "indicator": "hub-http-janus",
+    "host_or_service": "HubSpot internal API Gateway",
+    "notes": "Likely an HTTP client specifically for interacting with the Janus API Gateway."
+  },
+  {
+    "type": "API",
+    "indicator": "global-search-externals",
+    "host_or_service": "HubSpot internal search API",
+    "notes": "References external integrations for the global search functionality."
+  },
+  {
+    "type": "API",
+    "indicator": "global-search-shared",
+    "host_or_service": "HubSpot internal search API",
+    "notes": "Shared components or types related to the global search API."
+  },
+  {
+    "type": "Analytics",
+    "indicator": "usage-tracker-core",
+    "host_or_service": "HubSpot internal usage tracking",
+    "notes": "Core library for tracking user interactions and feature usage."
+  },
+  {
+    "type": "Analytics",
+    "indicator": "usage-tracker",
+    "host_or_service": "HubSpot internal usage tracking",
+    "notes": "Usage tracking functionality."
+  },
+  {
+    "type": "Analytics",
+    "indicator": "usage-tracker-container",
+    "host_or_service": "HubSpot internal usage tracking",
+    "notes": "Container or wrapper for the usage tracking functionality."
+  },
+  {
+    "type": "API",
+    "indicator": "self-service-api",
+    "host_or_service": "HubSpot internal API",
+    "notes": "Likely an API related to self-service features or account management."
+  },
+  {
+    "type": "API",
+    "indicator": "demographics-client",
+    "host_or_service": "HubSpot internal API",
+    "notes": "Client for fetching or interacting with demographic data."
+  },
+  {
+    "type": "API",
+    "indicator": "hubs-service-types",
+    "host_or_service": "HubSpot internal API",
+    "notes": "Type definitions for various HubSpot service APIs."
+  },
+  {
+    "type": "Integration",
+    "indicator": "prefetche",
+    "host_or_service": "Internal prefetching mechanism",
+    "notes": "Library or mechanism for prefetching resources, potentially including API data."
+  },
+  {
+    "type": "API",
+    "indicator": "hub-http-shared-msw-handlers",
+    "host_or_service": "HubSpot internal API (MSW)",
+    "notes": "Shared handlers for Mock Service Worker (MSW) used for testing `hub-http` interactions."
+  },
+  {
+    "type": "API",
+    "indicator": "hubspotter-http",
+    "host_or_service": "HubSpot internal API",
+    "notes": "Another internal HTTP client or layer."
+  },
+  {
+    "type": "API",
+    "indicator": "hubspotter-http-shared-msw-handlers",
+    "host_or_service": "HubSpot internal API (MSW)",
+    "notes": "Shared handlers for Mock Service Worker (MSW) used for testing `hubspotter-http` interactions."
+  },
+  {
+    "type": "API",
+    "indicator": "platform-navigation-bootstrap",
+    "host_or_service": "HubSpot internal platform API",
+    "notes": "Code related to initializing or bootstrapping the platform navigation, potentially involving API calls."
+  },
+  {
+    "type": "API",
+    "indicator": "customer-data-ui-utilities",
+    "host_or_service": "HubSpot internal API/UI",
+    "notes": "Utilities for handling customer data in the UI, likely interacting with customer data APIs."
+  },
+  {
+    "type": "API",
+    "indicator": "growth-monetization-service-types",
+    "host_or_service": "HubSpot internal API",
+    "notes": "Type definitions for services related to growth and monetization."
+  },
+  {
+    "type": "API",
+    "indicator": "ai-addon-copilot-preview",
+    "host_or_service": "HubSpot internal AI API",
+    "notes": "Related to an AI copilot preview feature, likely interacts with an AI service backend."
+  },
+  {
+    "type": "API",
+    "indicator": "apollo-link-hub-http",
+    "host_or_service": "HubSpot internal GraphQL API",
+    "notes": "Apollo Link for integrating with HubSpot's internal HTTP client for GraphQL."
+  },
+  {
+    "type": "GraphQL",
+    "indicator": "apollo-stack-hubspot",
+    "host_or_service": "HubSpot internal GraphQL",
+    "notes": "HubSpot's specific implementation or configuration of the Apollo GraphQL stack."
+  },
+  {
+    "type": "API",
+    "indicator": "data-fetching-client",
+    "host_or_service": "HubSpot internal API",
+    "notes": "Generic client for fetching data, could be used for REST or GraphQL."
+  },
+  {
+    "type": "GraphQL",
+    "indicator": "graphql",
+    "host_or_service": "GraphQL",
+    "notes": "Indicates the use of GraphQL."
+  },
+  {
+    "type": "API",
+    "indicator": "search-service-types",
+    "host_or_service": "HubSpot internal search API",
+    "notes": "Type definitions for the search service API."
+  },
+  {
+    "type": "API",
+    "indicator": "chatspot-client-types",
+    "host_or_service": "HubSpot internal ChatSpot API",
+    "notes": "Type definitions for the ChatSpot client API."
+  },
+  {
+    "type": "API",
+    "indicator": "chatspot-core",
+    "host_or_service": "HubSpot internal ChatSpot API",
+    "notes": "Core functionality for the ChatSpot feature, likely includes API interactions."
+  },
+  {
+    "type": "API",
+    "indicator": "feature-store-service-types",
+    "host_or_service": "HubSpot internal API",
+    "notes": "Type definitions for the feature store service."
+  },
+  {
+    "type": "API",
+    "indicator": "upgrade-management-service-types",
+    "host_or_service": "HubSpot internal API",
+    "notes": "Type definitions for the upgrade management service."
+  },
+  {
+    "type": "API",
+    "indicator": "getting-started-shared-tasks",
+    "host_or_service": "HubSpot internal API",
+    "notes": "Shared components or types for getting started tasks, likely involves API calls."
+  },
+  {
+    "type": "API",
+    "indicator": "platform-infra-nav-components",
+    "host_or_service": "HubSpot internal platform API",
+    "notes": "Components related to platform infrastructure and navigation, potentially interacting with backend APIs."
+  },
+  {
+    "type": "API",
+    "indicator": "ai-rendering-library",
+    "host_or_service": "HubSpot internal AI API",
+    "notes": "Library for rendering AI-related content, likely fetches data from AI services."
+  },
+  {
+    "type": "API",
+    "indicator": "ai-settings-ui-library",
+    "host_or_service": "HubSpot internal AI API",
+    "notes": "UI components for AI settings, likely interacts with backend AI configuration APIs."
+  },
+  {
+    "type": "GraphQL",
+    "indicator": "apollo-dlb",
+    "host_or_service": "HubSpot internal GraphQL",
+    "notes": "Apollo Data Loading Bridge, likely for optimized data fetching in GraphQL."
+  },
+  {
+    "type": "API",
+    "indicator": "copilot-plugins",
+    "host_or_service": "HubSpot internal AI API",
+    "notes": "Related to AI Copilot plugins, suggests interaction with a plugin service backend."
+  },
+  {
+    "type": "API",
+    "indicator": "cms-field-types",
+    "host_or_service": "HubSpot internal CMS API",
+    "notes": "Type definitions for CMS field data, suggesting interaction with a CMS backend API."
+  },
+  {
+    "type": "API",
+    "indicator": "customer-data-filters-ui",
+    "host_or_service": "HubSpot internal API/UI",
+    "notes": "UI components for filtering customer data, likely interacts with customer data APIs for filter options and application."
+  },
+  {
+    "type": "API",
+    "indicator": "customer-data-objects",
+    "host_or_service": "Hubspot internal API",
+    "notes": "Related to customer data objects, suggesting interaction with a customer data API."
+  },
+  {
+    "type": "API",
+    "indicator": "customer-data-objects-ui-components",
+    "host_or_service": "HubSpot internal API/UI",
+    "notes": "UI components for customer data objects, likely interacts with customer data APIs."
+  },
+  {
+    "type": "API",
+    "indicator": "customer-data-reference-ui-components",
+    "host_or_service": "HubSpot internal API/UI",
+    "notes": "UI components for referencing customer data, likely interacts with customer data APIs."
+  },
+  {
+    "type": "API",
+    "indicator": "reporting-action-components",
+    "host_or_service": "HubSpot internal reporting API/UI",
+    "notes": "UI components for actions within reporting, suggesting interaction with reporting APIs."
+  },
+  {
+    "type": "API",
+    "indicator": "reporting-ui-components",
+    "host_or_service": "HubSpot internal reporting API/UI",
+    "notes": "General UI components for reporting, likely interacts with reporting APIs."
+  },
+  {
+    "type": "API",
+    "indicator": "reporting-visualizations",
+    "host_or_service": "HubSpot internal reporting API/UI",
+    "notes": "Components for rendering reporting visualizations, fetches data from reporting APIs."
+  },
+  {
+    "type": "API",
+    "indicator": "crm-message-bus",
+    "host_or_service": "HubSpot internal CRM",
+    "notes": "Message bus for CRM-related communication, potentially used for real-time updates driven by backend events."
+  },
+  {
+    "type": "API",
+    "indicator": "customer-data-filters-ui-msw-helpers",
+    "host_or_service": "HubSpot internal API (MSW)",
+    "notes": "Mock Service Worker helpers for testing customer data filter UI interactions."
+  },
+  {
+    "type": "API",
+    "indicator": "customer-data-property-utils",
+    "host_or_service": "HubSpot internal API/Utils",
+    "notes": "Utilities for handling customer data properties, likely involves interaction with property definition APIs."
+  },
+  {
+    "type": "API",
+    "indicator": "FormUrlGenerator",
+    "host_or_service": "HubSpot internal API/Utils",
+    "notes": "Utility for generating form URLs, potentially interacting with form configuration APIs."
+  },
+  {
+    "type": "API",
+    "indicator": "framework-builder-read-service-client",
+    "host_or_service": "HubSpot internal API",
+    "notes": "Client for a read service related to framework building."
+  },
+  {
+    "type": "API",
+    "indicator": "framework-data-schema-quick-fetch",
+    "host_or_service": "HubSpot internal API",
+    "notes": "Quick fetch utility for framework data schemas, likely interacts with a schema service."
+  },
+  {
+    "type": "API",
+    "indicator": "framework-data-schema-resolvers",
+    "host_or_service": "HubSpot internal API",
+    "notes": "Resolvers for framework data schemas, used in data fetching, potentially for GraphQL."
+  },
+  {
+    "type": "API",
+    "indicator": "inbound-db-meta-service-client",
+    "host_or_service": "HubSpot internal API",
+    "notes": "Client for a metadata service related to the inbound database."
+  },
+  {
+    "type": "API",
+    "indicator": "inbound-db-properties-service-client",
+    "host_or_service": "HubSpot internal API",
+    "notes": "Client for a properties service related to the inbound database."
+  },
+  {
+    "type": "API",
+    "indicator": "property-translator",
+    "host_or_service": "HubSpot internal API/Utils",
+    "notes": "Utility for translating properties, potentially involves fetching translation data from an API."
+  },
+  {
+    "type": "API",
+    "indicator": "reference-resolvers",
+    "host_or_service": "HubSpot internal API",
+    "notes": "Resolvers for handling references, likely used in data fetching to resolve related objects via APIs."
+  },
+  {
+    "type": "API",
+    "indicator": "reference-resolvers-lite",
+    "host_or_service": "HubSpot internal API",
+    "notes": "A lighter version of reference resolvers."
+  },
+  {
+    "type": "API",
+    "indicator": "content-assistance-lib",
+    "host_or_service": "HubSpot internal API/AI",
+    "notes": "Library for content assistance features, likely interacts with backend content analysis or AI services."
+  },
+  {
+    "type": "API",
+    "indicator": "dashboard-lib",
+    "host_or_service": "HubSpot internal API/UI",
+    "notes": "Library for dashboard functionality, involves fetching and displaying data from various APIs."
+  },
+  {
+    "type": "API",
+    "indicator": "reporting-data",
+    "host_or_service": "HubSpot internal reporting API",
+    "notes": "Related to fetching and handling reporting data from a backend API."
+  },
+  {
+    "type": "API",
+    "indicator": "reporting-snowflake",
+    "host_or_service": "HubSpot internal reporting API",
+    "notes": "Indicates interaction with reporting data potentially stored or accessed via Snowflake."
+  },
+  {
+    "type": "API",
+    "indicator": "share-with-third-party-component-lib",
+    "host_or_service": "HubSpot internal API/UI",
+    "notes": "Components for sharing data with third parties, likely interacts with APIs to manage sharing configurations."
+  },
+  {
+    "type": "API",
+    "indicator": "ui-asset-management-lib",
+    "host_or_service": "HubSpot internal API/UI",
+    "notes": "Library for managing UI assets, could involve APIs for uploading, storing, or retrieving assets."
+  },
+  {
+    "type": "API",
+    "indicator": "ui-business-units-lib",
+    "host_or_service": "HubSpot internal API/UI",
+    "notes": "Library for managing business units in the UI, interacts with business unit APIs."
+  },
+  {
+    "type": "API",
+    "indicator": "reporting-plugins",
+    "host_or_service": "HubSpot internal reporting API",
+    "notes": "Related to reporting plugins, suggesting interaction with a plugin management or data API."
+  },
+  {
+    "type": "API",
+    "indicator": "reporting-reports",
+    "host_or_service": "HubSpot internal reporting API",
+    "notes": "Related to fetching and managing reporting reports via an API."
+  },
+  {
+    "type": "API",
+    "indicator": "crm-object-map",
+    "host_or_service": "HubSpot internal CRM API",
+    "notes": "Related to mapping CRM objects, likely interacts with an API for object definitions or relationships."
+  },
+  {
+    "type": "API",
+    "indicator": "file-manager-components",
+    "host_or_service": "HubSpot internal file manager API/UI",
+    "notes": "UI components for the file manager, interacts with file management APIs for uploading, listing, etc."
+  },
+  {
+    "type": "API",
+    "indicator": "FileManagerLib",
+    "host_or_service": "HubSpot internal file manager API",
+    "notes": "Library for file manager functionality, interacts with file management APIs."
+  },
+  {
+    "type": "API",
+    "indicator": "crm-pipelines-api-client-types",
+    "host_or_service": "HubSpot internal CRM Pipelines API",
+    "notes": "Type definitions for the CRM Pipelines API client."
+  },
+  {
+    "type": "API",
+    "indicator": "growth-data-modal",
+    "host_or_service": "HubSpot internal API/UI",
+    "notes": "Related to a data modal for growth features, likely fetches data via an API."
+  },
+  {
+    "type": "Integration",
+    "indicator": "ui-shepherd-react",
+    "host_or_service": "Shepherd",
+    "notes": "Integration with Shepherd, a JavaScript library for guiding users through applications."
+  },
+  {
+    "type": "Analytics",
+    "indicator": "ui-shepherd-tracker",
+    "host_or_service": "Shepherd/HubSpot internal analytics",
+    "notes": "Tracker for Shepherd guided tours, likely reports usage back to HubSpot's analytics."
+  },
+  {
+    "type": "Auth",
+    "indicator": "ui-universal-auth",
+    "host_or_service": "HubSpot internal authentication",
+    "notes": "Related to a universal authentication system or components."
+  },
+  {
+    "type": "API",
+    "indicator": "external-options-client-types",
+    "host_or_service": "HubSpot internal API",
+    "notes": "Type definitions for a client interacting with external options."
+  },
+  {
+    "type": "API",
+    "indicator": "ui-addon-video-player",
+    "host_or_service": "HubSpot internal API/UI",
+    "notes": "UI addon for a video player, could interact with video hosting or analytics APIs."
+  },
+  {
+    "type": "Payment",
+    "indicator": "growth-payments-core",
+    "host_or_service": "HubSpot internal payments API",
+    "notes": "Core functionality for growth-related payments, interacts with payment processing APIs."
+  },
+  {
+    "type": "API",
+    "indicator": "knowledge-content-types",
+    "host_or_service": "HubSpot internal API",
+    "notes": "Type definitions for knowledge content, suggests interaction with a knowledge base API."
+  },
+  {
+    "type": "Payment",
+    "indicator": "payment-link-components",
+    "host_or_service": "HubSpot internal payments API/UI",
+    "notes": "UI components for payment links, interacts with payment link creation or management APIs."
+  },
+  {
+    "type": "API",
+    "indicator": "rich-text-lib",
+    "host_or_service": "HubSpot internal API/UI",
+    "notes": "Library for rich text editing, could involve APIs for saving/loading content or handling assets."
+  },
+  {
+    "type": "Integration",
+    "indicator": "ui-addon-emoji-picker",
+    "host_or_service": "HubSpot internal API/UI",
+    "notes": "UI addon for an emoji picker, might interact with an API for fetching or managing emojis."
+  },
+  {
+    "type": "API",
+    "indicator": "integrations-error-boundary-lib",
+    "host_or_service": "HubSpot internal integrations API/Error Handling",
+    "notes": "Library for handling errors within integrations, potentially reports integration-specific errors to a backend."
+  },
+  {
+    "type": "Analytics",
+    "indicator": "integrations-tracking-lib",
+    "host_or_service": "HubSpot internal integrations API/Analytics",
+    "notes": "Library for tracking usage within integrations, reports integration-specific metrics."
+  },
+  {
+    "type": "API",
+    "indicator": "native-integrations-shared-strings",
+    "host_or_service": "HubSpot internal integrations API",
+    "notes": "Shared strings or configurations for native integrations, potentially fetched from a backend."
+  }
+]
+{"type":"API","indicator":"sales-checkout/v2/session-templates/has-payment-link","host_or_service":null,"location":"19140.js:28","confidence":"medium",
+"notes":"API endpoint related to checking for the existence of payment link session templates."}
+
+{"type":"API","indicator":"sales-checkout/v2/session-templates/from-objects","host_or_service":null,"location":"19140.js:29","confidence":"medium","notes":"API endpoint for creating payment link session templates from existing objects, likely products."}
+
+{"type":"GraphQL","indicator":"PaymentsAccountEligibilityQuery","host_or_service":null,"location":"19140.js:38","confidence":"medium","notes":"GraphQL query name for fetching payment account eligibility status."}
+
+{"type":"GraphQL","indicator":"FetchProductsQuery","host_or_service":null,"location":"19140.js:46","confidence":"medium","notes":"GraphQL query name for searching CRM products."}
+
+{"type":"API","indicator":"crm/v3/objects/${o.PRODUCT_TYPE_ID}","host_or_service":null,"location":"19140.js:59","confidence":"medium","notes":"CRM API endpoint for interacting with product objects using a dynamic type ID."}
+
+{"type":"Integration","indicator":"c().captureException","host_or_service":"Sentry or similar error tracking","location":"19140.js:77","confidence":"high","notes":"Method call indicates error tracking is in use, likely Sentry based on common patterns."}
+
+{"type":"Realtime","indicator":"a.TOPIC_NAMES.OBJECT_CREATED","host_or_service":null,"location":"19140.js:114","confidence":"medium","notes":"Reference to an OBJECT_CREATED topic name, suggesting a real-time messaging or pub/sub system for CRM object changes."}
+{"type":"Analytics","indicator":"d.trackCreateProduct","host_or_service":null,"location":"19140.js:115","confidence":"medium","notes":"Function call to track the 'create product' action, indicating product usage analytics."}
+{"type":"Analytics","indicator":"l.triggerWootricSurvey","host_or_service":"Wootric","location":"19140.js:116","confidence":"high","notes":"Function call directly mentions 'WootricSurvey', indicating integration with Wootric for surveys."}
+{"type":"Analytics","indicator":"l.PRODUCTS_SURVEY_ID","host_or_service":"Wootric","location":"19140.js:116","confidence":"medium","notes":"Reference to a specific survey ID within the Wootric integration, tied to products."}
+{"type":"Analytics","indicator":"d.trackCreateRecordEvent","host_or_service":null,"location":"19140.js:118","confidence":"medium","notes":"Function call to track a generic 'create record' event, part of broader CRM analytics."}
+{"type":"Config","indicator":"property-formatter-access","host_or_service":null,"location":"92465.js:81","confidence":"medium","notes":"Scope or permission name related to accessing property formatter features."}
+{"type":"Config","indicator":"property-formatter-read","host_or_service":null,"location":"92465.js:82","confidence":"medium","notes":"Scope or permission name related to read access for property formatter."}
+{"type":"Config","indicator":"property-formatter-write","host_or_service":null,"location":"92465.js:82","confidence":"medium","notes":"Scope or permission name related to write access for property formatter."}
+``json
+{"type":"CDN","indicator":"https://static.hsappstatic.net/","host_or_service":"static.hsappstatic.net","location":"23943.js:1","confidence":"high","notes":"HubSpot's static asset domain, likely serves front-end code for the CRM index UI."}
+{"type":"Integration","indicator":"tools.hubteam${m().getShort()?'qa':''}.com/TerritoriesUI/embed/leads/new?source=crm","host_or_service":"tools.hubteam.com","location":"23943.js:18","confidence":"high","notes":"Internal HubSpot tool domain for territories UI, embedded as an iframe for lead creation. The 'qa' conditional suggests different environments."}
+{"type":"Config","indicator":"GrowthOnboardingSetup:HasCompletedAgenticIntake","host_or_service":null,"location":"23943.js:39","confidence":"medium","notes":"Feature flag or configuration key related to growth onboarding and completing an 'agentic intake' step."}
+{"type":"Config","indicator":"fo-0010","host_or_service":null,"location":"23943.js:37","confidence":"medium","notes":"Identifier for an A/B test or experiment, potentially related to a new user flow or feature rollout."}
+{"type":"Analytics","indicator":"P.trackClickedEmptyStateWelcomeModal","host_or_service":null,"location":"23943.js:76","confidence":"medium","notes":"Analytics call to track clicks on the empty state welcome modal for object creation."}
+{"type":"API","indicator":"v.getRedirectionUrlForGuidedOnboarding","host_or_service":null,"location":"23943.js:80","confidence":"medium","notes":"Function call to get a redirection URL for a guided onboarding flow, implying integration with an onboarding system."}
+{"type":"API","indicator":"v.redirectTo","host_or_service":null,"location":"23943.js:80","confidence":"medium","notes":"Function call to perform a client-side redirection to a specific URL."}
+{"type":"Config","indicator":"r.CONTACT","host_or_service":null,"location":"23943.js:68","confidence":"medium","notes":"Internal constant or identifier for the 'Contact' object type in the CRM."}
+{"type":"Config","indicator":"r.COMPANY","host_or_service":null,"location":"23943.js:68","confidence":"medium","notes":"Internal constant or identifier for the 'Company' object type in the CRM."}
+{"type":"Config","indicator":"r.DEAL","host_or_service":null,"location":"23943.js:68","confidence":"medium","notes":"Internal constant or identifier for the 'Deal' object type in the CRM."}
+{"type":"Config","indicator":"bet-contact-creation-flow-access","host_or_service":null,"location":"23943.js:125","confidence":"medium","notes":"Scope or permission name related to accessing a specific contact creation flow (potentially a beta or experimental flow)."}
+{"type":"Config","indicator":"f.betDealCreationRestricted","host_or_service":null,"location":"23943.js:127","confidence":"medium","notes":"Function call to check if deal creation is restricted, likely based on permissions or feature flags, possibly related to a beta program."}
+{"type":"Analytics","indicator":"T.default.logForBizOps","host_or_service":null,"location":"23943.js:110","confidence":"medium","notes":"Logging function call specifically for 'BizOps', suggesting internal logging or telemetry for business operations features."}
+{"type":"Config","indicator":"crmi0001","host_or_service":null,"location":"23943.js:97","confidence":"medium","notes":"Identifier for another A/B test or experiment within the CRM index."}
+{"type":"API","indicator":"E.usePanelActions","host_or_service":null,"location":"23943.js:132","confidence":"low","notes":"Hook or function call related to controlling UI panels, specifically opening a 'Legacy Object Builder Panel'."}
+``
+``json
+[
+  {"type":"CDN","indicator":"https://static.hsappstatic.net/","host_or_service":"static.hsappstatic.net","location":"File Start","confidence":"high","notes":"HubSpot's static asset domain serving front-end code."},
+  {"type":"UIIntegration","indicator":"Loadable","host_or_service":"@loadable/component","location":"0Qom","confidence":"high","notes":"Uses a library for code splitting or lazy loading components."},
+  {"type":"API","indicator":"useGetIsDataWellShown","host_or_service":null,"location":"pSHG","confidence":"medium","notes":"Hook to fetch the state of whether the data well is shown, implies a backend state or setting storage."},
+  {"type":"API","indicator":"useSetIsDataWellShown","host_or_service":null,"location":"pSHG","confidence":"medium","notes":"Hook to update the state of the data well visibility, implies a backend endpoint for setting this state."},
+  {"type":"Telemetry","indicator":"c().captureException(e,{extra:{description:\"There was an error opening/closing the data well\"}})","host_or_service":"Sentry or similar","location":"pSHG","confidence":"high","notes":"Error tracking call, specifically for errors related to the data well functionality."},
+  {"type":"Analytics","indicator":"i.trackToggleDataWell","host_or_service":null,"location":"pSHG","confidence":"high","notes":"Analytics call to track when the data well is toggled, includes object type, view ID, page type, and new visibility state."},
+  {"type":"Config","indicator":"useViewMeta().data.idOrLabel","host_or_service":null,"location":"pSHG","confidence":"medium","notes":"Retrieves metadata about the current view, including its ID or label, used for data well state per view."},
+  {"type":"Config","indicator":"useCurrentObjectType()","host_or_service":null,"location":"pSHG","confidence":"medium","notes":"Retrieves the currently active CRM object type, used for data well state per object type."},
+  {"type":"FeatureFlag","indicator":"useIsDataWellEnabled()","host_or_service":null,"location":"pSHG","confidence":"high","notes":"Hook to check if the data well feature is enabled, controlled by a backend setting or feature flag."},
+  {"type":"InternalService","indicator":"s.HubsSettingClient.forCaller(\"crm-index-ui\")","host_or_service":"HubsSettingClient","location":"a+1Y","confidence":"high","notes":"Internal client for fetching portal settings from a HubSpot service, identified as being used by 'crm-index-ui'."},
+  {"type":"API","indicator":"l.fetch(e.settingsKey,e.defaultValue)","host_or_service":"HubsSettingClient","location":"a+1Y","confidence":"high","notes":"Method call on the HubsSettingClient to fetch a specific setting by key, implies an internal API call."},
+  {"type":"FeatureFlag","indicator":"settingsKey:\"Sales:DealInsights:Enabled\"","host_or_service":"HubsSettingClient","location":"a+1Y","confidence":"high","notes":"Specific setting key fetched from HubsSettingClient to enable/disable 'Sales:DealInsights'. Direct indicator of a feature flag."},
+  {"type":"Config","indicator":"useIndexPageAppSettingFieldValue(\"insightCard\")","host_or_service":null,"location":"a+1Y","confidence":"medium","notes":"Retrieves a specific setting value related to the 'insightCard' feature on index pages."},
+  {"type":"FeatureFlag","indicator":"useObjectTypeSupportsFeature(a)","host_or_service":null,"location":"a+1Y","confidence":"medium","notes":"Checks if the current object type supports a given feature (identified as 'insightCard'), part of feature gating logic."},
+  {"type":"FeatureFlag","indicator":"useHasFeatureAccess(a)","host_or_service":null,"location":"a+1Y","confidence":"high","notes":"Checks if the current user/portal has access to a given feature (identified as 'insightCard'), part of feature gating and permissions logic."},
+  {"type":"Config","indicator":"useCurrentPageType()===x.REPORT","host_or_service":null,"location":"a+1Y","confidence":"medium","notes":"Checks the current page type to potentially disable the data well on report pages."},
+  {"type":"Telemetry","indicator":"trackIndexInteractionsEvent({action:\"clicked restore property edits from action dropdown\"})","host_or_service":null,"location":"FjnE","confidence":"high","notes":"Analytics/telemetry call to track user interaction with the 'restore property edits' action."},
+  {"type":"FeatureFlag","indicator":"l.gate(\"RevisionHistory:NewFEApp\")","host_or_service":null,"location":"FjnE","confidence":"high","notes":"Uses a gating mechanism to check if the 'RevisionHistory:NewFEApp' feature is enabled, controls visibility of revision history link."},
+  {"type":"Config","indicator":"a(\"revision-history-read\")","host_or_service":null,"location":"FjnE","confidence":"high","notes":"Checks for the 'revision-history-read' scope, part of the permissioning system for accessing revision history."},
+  {"type":"API","indicator":"encodeURI(`/revision-history/${d}/${e.objectTypeId}`)","host_or_service":null,"location":"FjnE","confidence":"high","notes":"Constructs a URL for the revision history page, including portal ID and object type ID. Implies a dedicated backend service for revision history."}
+]
+``
+``json
+[
+  {"type":"CDN","indicator":"https://static.hsappstatic.net/","host_or_service":"static.hsappstatic.net","location":"File Start","confidence":"high","notes":"HubSpot's static asset domain serving front-end code for the CRM index UI."},
+  {"type":"API","indicator":"p().get(`${S}/all`)","host_or_service":null,"location":"nhi0","confidence":"medium","notes":"GET request to a '/trials/v1/hub-trials/app/all' endpoint to fetch all trial states. Implies a backend service managing trials."},
+  {"type":"API","indicator":"p().get(`${g}/available`)","host_or_service":null,"location":"nhi0","confidence":"medium","notes":"GET request to a '/trials/v1/trials/available' endpoint to fetch available trials. Implies a backend service managing trials."},
+  {"type":"Auth","indicator":"(0,c.getQueryParam)(\"displayUpgradeBanner\")","host_or_service":null,"location":"TOFj","confidence":"low","notes":"Checks for a 'displayUpgradeBanner' query parameter, potentially used for internal testing or feature enablement via URL."},
+  {"type":"Config","indicator":"u().isQa()","host_or_service":null,"location":"TOFj","confidence":"high","notes":"Checks if the application is running in a 'qa' (Quality Assurance) environment, affecting behavior like upgrade banner display and admin checks."},
+  {"type":"API","indicator":"f.call(I.getUpgradeConfigWithPurchaseMotionsRpc,{pathParameters:{upgradeKey:e},queryParameters:{limit:t,amountUsed:r}})","host_or_service":null,"location":"TOFj","confidence":"high","notes":"RPC call to fetch upgrade configuration based on an 'upgradeKey', usage limit, and amount used. Involves backend service 'getUpgradeConfigWithPurchaseMotionsRpc'."},
+  {"type":"Telemetry","indicator":"g().captureException","host_or_service":"Sentry or similar","location":"TOFj","confidence":"high","notes":"Error tracking call, used for capturing exceptions during upgrade banner config fetching. Likely Sentry or a similar service."},
+  {"type":"Telemetry","indicator":"(0,R.trackUpgradeBannerFailure)(e)","host_or_service":null,"location":"TOFj","confidence":"high","notes":"Analytics call to track failures when fetching upgrade banners."},
+  {"type":"Telemetry","indicator":"(0,C.track)(\"interaction\",Object.assign({action:\"viewed upgrade point\"},i,(0,N.getUpgradeConfigTrackingProperties)(e)))","host_or_service":null,"location":"TOFj","confidence":"high","notes":"Analytics call to track user interaction, specifically when an 'upgrade point' (likely the banner) is viewed."},
+  {"type":"API","indicator":"`${(0,ye.getFullUrl)(\"app-api\")}/monetization/v3/request`","host_or_service":"app-api (internal HubSpot service)","location":"TOFj","confidence":"high","notes":"Constructs the base URL for monetization requests, pointing to an internal 'app-api' service."},
+  {"type":"API","indicator":"E().post(`${Be}/access-owned`,{data:{apiName:e,requestSeatText:t,requestedSeat:r}})","host_or_service":"app-api (internal HubSpot service)","location":"TOFj","confidence":"high","notes":"POST request to '/monetization/v3/request/access-owned' for requesting seat access. Part of the monetization API."},
+  {"type":"API","indicator":"E().post(`${Be}/seat?sendAdminNotification=true`,{data:r})","host_or_service":"app-api (internal HubSpot service)","location":"TOFj","confidence":"high","notes":"POST request to '/monetization/v3/request/seat' to request a seat, with a query parameter to send admin notifications."},
+  {"type":"API","indicator":"E().post(`${Be}/sku`,{data:{apiName:e}})","host_or_service":"app-api (internal HubSpot service)","location":"TOFj","confidence":"high","notes":"POST request to '/monetization/v3/request/sku' to request an SKU. Part of the monetization API."},
+  {"type":"API","indicator":"E().post(`${Be}/trial`,{data:{apiName:e}})","host_or_service":"app-api (internal HubSpot service)","location":"TOFj","confidence":"high","notes":"POST request to '/monetization/v3/request/trial' to request a trial. Part of the monetization API."},
+  {"type":"API","indicator":"E().post(`${Be}/quote-purchase`,{data:{hub:e}})","host_or_service":"app-api (internal HubSpot service)","location":"TOFj","confidence":"high","notes":"POST request to '/monetization/v3/request/quote-purchase' to request a quote or initiate purchase. Part of the monetization API."},
+  {"type":"API","indicator":"E().post(\"monetization/v3/request/seat\"+(t?\"\":\"?sendAdminNotification=true\"),{data:{apiName:e,requestReason:r,requestedSeatType:a}})","host_or_service":"app-api (internal HubSpot service)","location":"TOFj","confidence":"high","notes":"POST request to '/monetization/v3/request/seat' for seat requests, conditionally adding admin notification parameter."},
+  {"type":"InternalService","indicator":"com.hubspot.buying.rpc.ProductRpc","host_or_service":"ProductRpc","location":"TOFj","confidence":"high","notes":"Reference to an internal RPC service for buying/product related operations."},
+  {"type":"API","indicator":"rpcName:\"getProductInventory\"","host_or_service":"ProductRpc","location":"TOFj","confidence":"high","notes":"RPC method name on the ProductRpc service to get product inventory."},
+  {"type":"Config","indicator":"auth:\"app\"","host_or_service":null,"location":"TOFj","confidence":"medium","notes":"Authentication type for the ProductRpc call, indicating application-level authentication."},
+  {"type":"Config","indicator":"fingerprint:\"AAAAAAAAAAAw7e7WvkfZNpwP6LXzGzX8\"","host_or_service":null,"location":"TOFj","confidence":"high","notes":"Fingerprint associated with the RPC call definition, potentially for versioning or integrity checking."},
+  {"type":"Auth","indicator":"(0,se.parse)(window.location.search.substring(1)).isAdmin","host_or_service":null,"location":"TOFj","confidence":"low","notes":"Parses URL search parameters to check for an 'isAdmin' flag, likely for internal testing or debugging permissions."},
+  {"type":"Auth","indicator":"de=(e,t=re)=>{...e.scopes.indexOf(\"billing-write\")...e.scopes.indexOf(\"marketable-contacts-write\")...e.scopes.indexOf(\"hub-owner\")...e.scopes.indexOf(\"hub-parcel-write\")...}","host_or_service":null,"location":"TOFj","confidence":"high","notes":"Function checking user scopes (billing-write, marketable-contacts-write, hub-owner, hub-parcel-write) to determine administrative or feature access."},
+  {"type":"Auth","indicator":"(0,ne.getUserInfo)().then((({user:t})=>de(t,e)))","host_or_service":null,"location":"TOFj","confidence":"high","notes":"Fetches current user information (including scopes) using `getUserInfo` and then applies scope checks via the `de` function."}
+]
+``
+``
+``json
+[
+  {"type":"CDN","indicator":"https://static.hsappstatic.net/","host_or_service":"static.hsappstatic.net","location":"File Start","confidence":"high","notes":"HubSpot's static asset domain serving front-end code for the CRM index UI."},
+  {"type":"InternalService","indicator":"(0,l.getFullUrl)(\"app\",{domainOverride:\"hubspot\",envOverride:\"prod\"})","host_or_service":"HubSpot internal service locator","location":"28us","confidence":"high","notes":"Uses an internal function to construct full URLs for HubSpot applications, specifying domain and environment overrides."},
+  {"type":"InternalService","indicator":"(0,l.getFullUrl)(\"app\",{domainOverride:\"hubspot\",envOverride:\"qa\"})","host_or_service":"HubSpot internal service locator","location":"28us","confidence":"high","notes":"Uses an internal function to construct full URLs for HubSpot applications, specifying domain and environment overrides for QA."},
+  {"type":"InternalService","indicator":"(0,l.getFullUrl)(\"app\",{domainOverride:\"hubteam\",envOverride:\"qa\"})","host_or_service":"HubSpot internal service locator","location":"28us","confidence":"high","notes":"Uses an internal function to construct full URLs for HubSpot applications, specifying domain and environment overrides for HubTeam QA."},
+  {"type":"InternalService","indicator":"(0,l.getFullUrl)(\"app\",{domainOverride:\"hubteam\",envOverride:\"prod\"})","host_or_service":"HubSpot internal service locator","location":"28us","confidence":"high","notes":"Uses an internal function to construct full URLs for HubSpot applications, specifying domain and environment overrides for HubTeam Prod."},
+  {"type":"InternalService","indicator":"(0,l.getFullUrl)(\"local\",{domainOverride:\"hubspot\",envOverride:\"prod\"})","host_or_service":"HubSpot internal service locator","location":"28us","confidence":"high","notes":"Uses an internal function to construct full URLs for local development environments."},
+  {"type":"InternalService","indicator":"(0,l.getFullUrl)(\"local\",{domainOverride:\"hubspot\",envOverride:\"qa\"})","host_or_service":"HubSpot internal service locator","location":"28us","confidence":"high","notes":"Uses an internal function to construct full URLs for local development environments."},
+  {"type":"InternalService","indicator":"(0,l.getFullUrl)(\"local\",{domainOverride:\"hubteam\",envOverride:\"prod\"})","host_or_service":"HubSpot internal service locator","location":"28us","confidence":"high","notes":"Uses an internal function to construct full URLs for local development environments."},
+  {"type":"InternalService","indicator":"(0,l.getFullUrl)(\"local\",{domainOverride:\"hubteam\",envOverride:\"qa\"})","host_or_service":"HubSpot internal service locator","location":"28us","confidence":"high","notes":"Uses an internal function to construct full URLs for local development environments."},
+  {"type":"Integration","indicator":"window.addEventListener(\"message\",e)","host_or_service":null,"location":"28us","confidence":"high","notes":"Listens for 'message' events on the window, indicating cross-origin communication, likely with an embedded iframe."},
+  {"type":"Integration","indicator":"this.iFrame.contentWindow.postMessage(t,new URL(this.iFrame.src).origin)","host_or_service":null,"location":"28us","confidence":"high","notes":"Sends messages to the content window of an embedded iframe, enabling communication with the iframe's origin."},
+  {"type":"Integration","indicator":"window.parent.postMessage(i,e)","host_or_service":null,"location":"28us","confidence":"high","notes":"Sends messages to the parent window, enabling communication when embedded within an iframe."},
+  {"type":"Integration","indicator":"window.parent.postMessage(i,this.outsideFrameDomain)","host_or_service":null,"location":"28us","confidence":"high","notes":"Sends messages to a specific parent frame origin for cross-origin communication."},
+  {"type":"Integration","indicator":"window.parent.postMessage(i,\"*\")","host_or_service":null,"location":"28us","confidence":"low","notes":"Sends messages to any origin, a less secure method of cross-origin communication."},
+  {"type":"UIIntegration","indicator":"u:[\"embedded-academy\",\"embedded-learnByDoing\",\"academy\",\"academy-play-on-hover\",\"global-nav-recommendations-modal\"]","host_or_service":null,"location":"28us","confidence":"medium","notes":"List of potential contexts or rendering environments where the embedded content might be displayed."},
+  {"type":"API","indicator":"`${(0,l.getFullUrl)(L)}/embedded-academy-ui`","host_or_service":"embedded-academy-ui (internal HubSpot service)","location":"28us","confidence":"high","notes":"Constructs the base URL for the embedded academy UI, pointing to an internal service."},
+  {"type":"API","indicator":"`${T}/static?${c.toString()}`","host_or_service":"embedded-academy-ui (internal HubSpot service)","location":"28us","confidence":"high","notes":"Constructs the URL for static embedded academy content, including query parameters like parentAppName."},
+  {"type":"API","indicator":"`${T}/${s}/${a}?${c.toString()}`","host_or_service":"embedded-academy-ui (internal HubSpot service)","location":"28us","confidence":"high","notes":"Constructs the URL for dynamic embedded academy content, including portal ID, target widget, and query parameters."},
+  {"type":"Config","indicator":"sessionStorage.getItem(q)","host_or_service":"Session Storage","location":"28us","confidence":"medium","notes":"Retrieves a subdomain override from session storage, potentially for testing or routing embedded content."},
+  {"type":"Config","indicator":"\"EmbeddedAcademy:subDomainOverride\"","host_or_service":"Session Storage","location":"28us","confidence":"medium","notes":"Key used to store a subdomain override in session storage."},
+  {"type":"Config","indicator":"window.hubspot.bender.currentProject","host_or_service":null,"location":"28us","confidence":"medium","notes":"Accesses properties on a global 'hubspot.bender' object to get the current project name, likely for identifying the embedding application."}
+]
+
