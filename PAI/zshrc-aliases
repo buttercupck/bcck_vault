@@ -1,34 +1,6 @@
 ## PAI Configuration
 export PAI_DIR="$HOME/.claude"  # Personal AI Infrastructure directory
 
-#Platform agnostic
-export PAI_VENDOR="openai"
-if [ -f "$PAI_DIR/.env" ]; then
-  export $(grep -v '^#' "$PAI_DIR/.env" | xargs)
-fi
-# Platform-agnostic wrapper (currently only OpenAI)
-function pai_exec() {
-  case "$PAI_VENDOR" in
-    openai)
-      # Ensure OpenAI CLI is installed
-      bun install -g openai >/dev/null 2>&1
-      # Run OpenAI CLI with all passed arguments
-      openai "$@"
-      ;;
-    *)
-      echo "Error: Unknown PAI_VENDOR '$PAI_VENDOR'. Only 'openai' is supported right now."
-      ;;
-  esac
-}
-# =====================
-# Aliases
-# =====================
-
-# Start a new OpenAI session
-alias pai="pai_exec"
-alias paikey="echo Current vendor: $PAI_VENDOR; echo \$OPENAI_API_KEY"
-
-
 ## PAI / Claude Code Aliases
 alias cl="bun install -g @anthropic-ai/claude-code; claude --dangerously-skip-permissions"
 alias clr="bun install -g @anthropic-ai/claude-code; claude --dangerously-skip-permissions --resume"

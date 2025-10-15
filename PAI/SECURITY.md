@@ -2,11 +2,11 @@
 
 ## 🔴 PUBLIC REPOSITORY WARNING
 
-**PAI is a PUBLIC version of the personal PAI_DIRECTORY infrastructure**
+**PAI is a PUBLIC version of the personal .claude infrastructure**
 
-### NEVER COPY BLINDLY FROM PAI_DIRECTORY TO PUBLIC PAI
+### NEVER COPY BLINDLY FROM .claude TO PAI
 
-This repository is **PUBLIC** and visible to everyone on the internet. It's a sanitized, public instance of the personal PAI_DIRECTORY infrastructure. When moving functionality from PAI_DIRECTORY to PAI:
+This repository is **PUBLIC** and visible to everyone on the internet. It's a sanitized, public instance of the personal .claude infrastructure. When moving functionality from .claude to PAI:
 
 ### ❌ NEVER INCLUDE:
 - Personal API keys or tokens
@@ -18,7 +18,7 @@ This repository is **PUBLIC** and visible to everyone on the internet. It's a sa
 - Client or customer data
 - Internal URLs or endpoints
 - Security credentials
-- Personal file paths beyond ${PAI_DIR}
+- Personal file paths beyond ${PAI_HOME}
 
 ### ✅ SAFE TO INCLUDE:
 - Generic command structures
@@ -33,16 +33,16 @@ This repository is **PUBLIC** and visible to everyone on the internet. It's a sa
 1. **Audit all changes** - Review every file being committed
 2. **Search for sensitive data** - grep for emails, keys, tokens
 3. **Check context files** - Ensure no personal context is included
-4. **Verify paths** - All paths should use ${PAI_DIR}, not personal directories
+4. **Verify paths** - All paths should use ${PAI_HOME}, not personal directories
 5. **Test with fresh install** - Ensure it works without your personal setup
 
 ### 📋 TRANSFER CHECKLIST:
 
-When copying from PAI_DIRECTORY to PAI:
+When copying from .claude to PAI:
 
 - [ ] Remove all API keys (replace with placeholders)
 - [ ] Remove personal information
-- [ ] Replace specific paths with ${PAI_DIR}
+- [ ] Replace specific paths with ${PAI_HOME}
 - [ ] Remove business-specific context
 - [ ] Sanitize example data
 - [ ] Update documentation to be generic
@@ -59,11 +59,11 @@ When copying from PAI_DIRECTORY to PAI:
 
 ### 💡 BEST PRACTICES:
 
-- Keep PAI_DIRECTORY private and local
+- Keep .claude private and local
 - PAI should be the generic, public template
 - Use environment variables for all sensitive config
 - Document what needs to be configured by users
-- Provide example env-example files, never real .env
+- Provide example .env.example files, never real .env
 
 ---
 

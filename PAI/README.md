@@ -7,6 +7,7 @@
 </picture>
 
 # **PAI** - Personal AI Infrastructure
+**(Pronounced "pie" 🥧)**
 
 ### **Open-source personal AI infrastructure for orchestrating your life and work**
 
@@ -35,50 +36,9 @@
 ## 🚀 **Recent Updates**
 
 > [!TIP]
-> **[🎉 v0.2.4 Released!](https://github.com/danielmiessler/PAI/releases/tag/v0.2.4)** - README Cleanup & Organization
-
-<details>
-<summary><strong>Click to see all updates</strong></summary>
+> **[🎉 v0.2.1 Released!](https://github.com/danielmiessler/PAI/releases/tag/v0.2.1)** - Hooks System Update with portable installation support
 
 <details open>
-<summary><strong>📅 October 6, 2025 - README Cleanup & Organization (v0.2.4)</strong></summary>
-
-- 📂 **Collapsed Updates**: Implemented two-level collapsing structure for updates section
-- 🎯 **Better Navigation**: Reduced visual clutter with nested `<details>` tags
-- 🧹 **Issue Management**: Closed PR #24 (voice system) after recent system changes
-- 📊 **Space Optimization**: Updates section now takes minimal vertical space
-- ✅ **Accessibility**: All information still accessible through intuitive collapse/expand
-
-</details>
-
-<details>
-<summary><strong>📅 October 2, 2025 - Voice System Update</strong></summary>
-
-- 🎙️ **Zero-Cost Voice System**: Migrated from ElevenLabs API to macOS native Premium/Enhanced voices
-- 💰 **No API Costs**: 100% offline voice synthesis using built-in macOS neural TTS
-- 🔊 **High-Quality Voices**: Uses Premium voices (Jamie, Ava, Serena, Isha) and Enhanced voices (Tom, Oliver, Samantha)
-- 🔒 **Complete Privacy**: All voice processing happens locally, no cloud services
-- ⚙️ **Centralized Config**: Voice settings managed via `voices.json` configuration file
-- 🚀 **Browser Tools Update**: Switched from Playwright to Chrome DevTools MCP for web automation
-
-</details>
-
-<details>
-<summary><strong>📅 September 28, 2025 - Complete Visibility & Portability Update (v0.2.3)</strong></summary>
-
-- 📁 **Directory Renamed**: `.claude` → `PAI_DIRECTORY` for better visibility
-- 🌍 **Vendor Agnostic**: Works with any AI vendor (Claude, GPT, Gemini, etc.)
-- 👁️ **No More Hidden Files**:
-  - `.zshrc` → `zshrc-aliases`
-  - `.env-example` → `env-example`
-- 🔧 **Dynamic Paths**: All hardcoded paths replaced with `${PAI_DIR}`
-- 📍 **Consistent Config**: `.env` now lives in `${PAI_DIR}/.env`
-- 🐛 **Issues Fixed**: #20 (env location) and #21 (hardcoded paths)
-- ✅ **Full Portability**: Install PAI anywhere, everything just works
-
-</details>
-
-<details>
 <summary><strong>📅 September 26, 2025 - Hooks System Update</strong></summary>
 
 - 🪝 **Hooks Sanitized**: Updated all hook files to be public-ready with no sensitive data
@@ -151,12 +111,10 @@
 - 🔧 Fixed hardcoded path issues
 - 🪝 Working on missing hooks
 
-**September 12, 2025**
+**September 12, 2025**  
 - 🧠 Dynamic resource loading system
 - ⚡ Submit-user-hook for context loading
 - 🗺️ Dynamic routing via load-dynamic-requirements
-
-</details>
 
 </details>
 
@@ -513,8 +471,8 @@ brew install oven-sh/bun/bun
 git clone https://github.com/danielmiessler/PAI.git
 cd PAI
 
-# Note: PAI_DIRECTORY is now visible by default
-ls -la  # See all files including PAI_DIRECTORY
+# Note: .claude directory is hidden by default
+ls -la  # See all files including .claude
 ```
 
 #### **Step 3: Configure PAI Directory Variable** ⚠️ **IMPORTANT**
@@ -526,13 +484,13 @@ ls -la  # See all files including PAI_DIRECTORY
 ```bash
 # Add to your shell config (~/.zshrc or ~/.bashrc)
 # Replace /path/to/PAI with YOUR actual PAI installation path
-export PAI_DIR="/path/to/PAI/PAI_DIRECTORY"  # Point to the PAI_DIRECTORY in your PAI installation
+export PAI_DIR="/path/to/PAI/.claude"  # Point to the .claude directory in your PAI installation
 export PAI_HOME="$HOME"  # Your home directory
 
 # Example (adjust to YOUR installation path):
-# export PAI_DIR="$HOME/Projects/PAI/PAI_DIRECTORY"
-# export PAI_DIR="$HOME/Documents/PAI/PAI_DIRECTORY"
-# export PAI_DIR="/Users/yourname/PAI/PAI_DIRECTORY"
+# export PAI_DIR="$HOME/Projects/PAI/.claude"
+# export PAI_DIR="$HOME/Documents/PAI/.claude"
+# export PAI_DIR="/Users/yourname/PAI/.claude"
 
 # Reload your shell configuration
 source ~/.zshrc  # or source ~/.bashrc
@@ -541,12 +499,13 @@ source ~/.zshrc  # or source ~/.bashrc
 #### **Step 4: Configure Environment**
 
 ```bash
-# Copy environment template to PAI_DIRECTORY
-cp ${PAI_DIR}/env-example ${PAI_DIR}/.env
+# Copy environment template
+cp .env.example ~/.env
 
-# Add your API keys (optional)
-vim ${PAI_DIR}/.env
-# Add: OPENAI_API_KEY="your_key_here" (if using GPT integration)
+# Add your API keys (optional but recommended)
+vim ~/.env
+# Add: ELEVENLABS_API_KEY="your_key_here"
+# Add: OPENAI_API_KEY="your_key_here"
 ```
 
 #### **Step 5: Launch PAI**
@@ -555,11 +514,8 @@ vim ${PAI_DIR}/.env
 # Navigate to PAI directory
 cd ${PAI_DIR}
 
-# Optional: Set up voice notifications (macOS only)
-# Download Premium/Enhanced voices from System Settings → Voice (Live Speech)
-# Then start the voice server:
-cd voice-server && bun server.ts &
-# See documentation/VOICE-SETUP-GUIDE.md for detailed setup instructions
+# Optional: Start voice server for audio notifications
+cd voice-server && ./install.sh && ./start.sh
 
 # Open Claude Code and start using PAI!
 # Your personal AI infrastructure is ready 🚀
@@ -569,12 +525,13 @@ cd voice-server && bun server.ts &
 
 ```bash
 # Required - MUST be configured for PAI to work properly
-PAI_DIR="/path/to/PAI/PAI_DIRECTORY"    # PAI's PAI_DIRECTORY (system agnostic)
+PAI_DIR="/path/to/PAI/.claude"    # PAI's .claude directory (system agnostic)
 PAI_HOME="$HOME"                  # Your home directory
 
 # Optional API Keys
-OPENAI_API_KEY="your_key"         # GPT integration (optional)
-PORT="8888"                        # Voice server port (default: 8888)
+ELEVENLABS_API_KEY="your_key"     # Voice synthesis
+OPENAI_API_KEY="your_key"         # GPT integration
+PORT="8888"                        # Voice server port
 
 # Digital Assistant Customization
 DA="YourAssistantName"            # Your AI assistant's name (default: "Assistant")
@@ -582,7 +539,7 @@ DA_COLOR="purple"                 # Display color (purple, blue, green, cyan, et
 ```
 
 > [!TIP]
-> **Why PAI_DIR is Important:** The PAI_DIR variable makes the entire PAI system portable and installation-agnostic. All commands, contexts, and hooks reference `${PAI_DIR}` instead of hardcoded paths. This means you can install PAI anywhere on your system, and as long as PAI_DIR points to your `PAI_DIRECTORY`, everything will work seamlessly.
+> **Why PAI_DIR is Important:** The PAI_DIR variable makes the entire PAI system portable and installation-agnostic. All commands, contexts, and hooks reference `${PAI_DIR}` instead of hardcoded paths. This means you can install PAI anywhere on your system, and as long as PAI_DIR points to your `.claude` directory, everything will work seamlessly.
 
 ---
 
@@ -595,8 +552,8 @@ DA_COLOR="purple"                 # Display color (purple, blue, green, cyan, et
 | [Quick Start](#-quick-start) | Get up and running | 5 min |
 | [Architecture](#-architecture) | Understand the system | 10 min |
 | [SECURITY.md](./SECURITY.md) | Security guidelines | 5 min |
-| [Voice Server](./PAI_DIRECTORY/voice-server/README.md) | Enable voice interaction | 10 min |
-| [Commands Directory](./PAI_DIRECTORY/commands/) | Browse all commands | 15 min |
+| [Voice Server](./.claude/voice-server/README.md) | Enable voice interaction | 10 min |
+| [Commands Directory](./.claude/commands/) | Browse all commands | 15 min |
 
 </div>
 
