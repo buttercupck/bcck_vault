@@ -17,14 +17,5 @@ Active research on HubSpot platform for vulnerability discovery.
 - Client-side vulnerabilities
 - API security testing
 - Frontend bundle analysis
-
-## Research Files:
-- [[HubSpot-Frontend-Overview]]
-- [[CRM-Common-DLB-Bundle]]
-- [[Dataset-Permissions-Access-Control]]
-- [[API-Keys-Management]]
-
-## Cross-References:
-- [[METH-Bug-Bounty-SaaS-Testing]]
-- [[LRN-JavaScript-Security-Analysis]]
-- [[METH-Frontend-Vulnerability-Research]]
+- Finding XSS vulnerabilities
+- Chaining low severity vulnerabilities into on high severity gadget.
