@@ -17,6 +17,8 @@ Below are links to notes for major JavaScript bundles and modules, along with a 
 - [[TARGET-HubSpot-CRM-Common-DLB-Bundle]]
   - **Purpose:** Contains fundamental CRM logic, shared UI components, and core client-side functionalities across HubSpot's CRM products. This is often a large, foundational bundle.
   - **Current Version:** `static-1.3890` (as of 2025-07-15)
+- [[hubspot-js-loader.txt]]
+	- Contains research done on the contacts page in js files
 
 ## Research Areas:
 - Frontend architecture analysis

@@ -66,12 +66,6 @@ FOLLOW THE INSTRUCTIONS IN THE PLAYWRIGHT SESSIONS FROM THE
 
 `${PAI_DIR}/context/tools/CLAUDE.md` you already loaded!
 
-## VOICE OUTPUT USING THE HOOK SYSTEM
-
-We have an extensive voice interaction system using the Claude Code hook system. Documentation is here.
-
-``${PAI_DIR}/context/documentation/voicesystem/CLAUDE.md``
-
 ## TOOLS ARE YOUR FOUNDATION
 
 ## CLAUDE.md hierarchy
@@ -131,32 +125,13 @@ Fill this in with your peeps.
 
 The voice notification system depends on this exact structure. If you don't follow this format, voice notifications will fail and the user experience will be broken.
 
-### REQUIRED FORMAT FOR EVERY RESPONSE:
-
-📅 Use actual current date/time from system (run `date` command if needed) in format: YYYY-MM-DD HH:MM:SS
-**📋 SUMMARY:** Brief overview of request and accomplishment
-**🔍 ANALYSIS:** Key findings and context
-**⚡ ACTIONS:** Steps taken with tools used
-**✅ RESULTS:** Outcomes and changes made - **SHOW ACTUAL OUTPUT CONTENT HERE**
-**📊 STATUS:** Current state after completion
-**➡️ NEXT:** Recommended follow-up actions
-**🎯 COMPLETED:** Completed [task description in 5-6 words]
-**🗣️ CUSTOM COMPLETED:** [Optional: Voice-optimized response under 8 words]
-
 ### 🚨 CRITICAL RULES:
 1. **NEVER use the default Claude "I'll help you..." format**
 2. **NEVER skip the structured format, even for simple answers**
-3. **ALWAYS end with 🎯 COMPLETED:** - this triggers voice notifications
-4. **The COMPLETED line is parsed by hooks for voice output - IT IS MANDATORY**
-5. **Even for errors or refusals, use this format**
-6. **Even for single-word answers, use this format**
+3. **The COMPLETED line is parsed by hooks for voice output - IT IS MANDATORY**
+4. **Even for errors or refusals, use this format**
+5. **Even for single-word answers, use this format**
 
-### Voice System Integration:
-- The 🗣️ CUSTOM COMPLETED line is for voice output (when appropriate)
-- The 🎯 COMPLETED line is the fallback if CUSTOM COMPLETED is missing/too long
-- It's sent to the voice server (configure your own voice IDs)
-- Agents use their specific voice IDs (see voice system documentation)
-- Format: "Completed [task in 5-6 words]" - spoken in first person
 
 ### CUSTOM COMPLETED Guidelines:
 - **USE WHEN:** Response can be naturally spoken in under 8 words
@@ -178,16 +153,6 @@ For example:
 - Analysis → Show the actual analysis content
 - Quotes extraction → Show the extracted quotes
 - Translation → Show the translated text
-
-### Text-to-Speech Optimization
-
-• Proper punctuation for natural flow
-• Numbers as words when spoken differently
-• Spell out acronyms on first use
-• Pronunciation hints for unusual terms
-• Skip special characters that don't speak well
-
-**REMEMBER: If you don't follow this format, the voice system breaks. No exceptions.**
 
 # Navigate to the CLAUDE.md file
 cd "$PAI_DIR/context"
