@@ -6,7 +6,7 @@ date: 2025-10-07
 
 # Session Terminate Protocol
 
-**Use this checklist at the end of every budget work session to ensure your work is saved and synced across all devices.**
+**Use this checklist at the end of every session to ensure your work is saved and synced across all devices.**
 
 ---
 
