@@ -23,6 +23,9 @@ ssh_keys.pub
 *.pem
 *.key
 
+# Claude Code / PAI sensitive settings
+.claude/settings.json
+
 # macOS
 .AppleDouble
 .LSOverride

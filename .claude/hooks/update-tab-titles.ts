@@ -78,6 +78,11 @@ async function main() {
     }
 
     // Launch background process for better Haiku summary
+    // DISABLED: update-tab-title.ts file doesn't exist (upstream PAI bug)
+    // This was meant to generate a better title using Haiku,
+    // but the implementation file was never included in the repository.
+    // The immediate tab title set above (lines 70-78) works fine.
+    /*
     try {
       if (prompt && prompt.length > 3) {
         const paiDir = process.env.PAI_DIR || `${process.env.HOME}/.claude`;
@@ -90,6 +95,7 @@ async function main() {
     } catch (e) {
       // Silently fail
     }
+    */
 
     process.exit(0);
   } catch (error) {
