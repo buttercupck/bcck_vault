@@ -9,24 +9,43 @@ import { homedir } from "os";
 import { join } from "path";
 import { existsSync } from "fs";
 
-// Load .env from user home directory
-const envPath = join(homedir(), '.env');
-if (existsSync(envPath)) {
-  const envContent = await Bun.file(envPath).text();
+// Load .env from PAI_DIR/.env first, then fallback to hardcoded path, then home directory
+const paiDir = process.env.PAI_DIR || join(homedir(), 'Documents/vault_self/bcck_vault/.claude');
+const claudeEnvPath = join(paiDir, '.env');
+const homeEnvPath = join(homedir(), '.env');
+
+// Try PAI_DIR/.env first
+let envLoaded = false;
+if (existsSync(claudeEnvPath)) {
+  const envContent = await Bun.file(claudeEnvPath).text();
   envContent.split('\n').forEach(line => {
     const [key, value] = line.split('=');
     if (key && value && !key.startsWith('#')) {
       process.env[key.trim()] = value.trim();
     }
   });
+  envLoaded = true;
+  console.log(`📄 Loaded environment from ${claudeEnvPath}`);
+}
+
+// Fallback to ~/.env if .claude/.env doesn't exist
+if (!envLoaded && existsSync(homeEnvPath)) {
+  const envContent = await Bun.file(homeEnvPath).text();
+  envContent.split('\n').forEach(line => {
+    const [key, value] = line.split('=');
+    if (key && value && !key.startsWith('#')) {
+      process.env[key.trim()] = value.trim();
+    }
+  });
+  console.log('📄 Loaded environment from ~/.env');
 }
 
 const PORT = parseInt(process.env.PORT || "8888");
 const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY;
 
 if (!ELEVENLABS_API_KEY) {
-  console.error('⚠️  ELEVENLABS_API_KEY not found in ~/.env');
-  console.error('Add: ELEVENLABS_API_KEY=your_key_here');
+  console.error('⚠️  ELEVENLABS_API_KEY not found in .claude/.env or ~/.env');
+  console.error('Add to .claude/.env: ELEVENLABS_API_KEY=your_key_here');
 }
 
 // Default voice ID (Kai's voice)

@@ -17,6 +17,9 @@ RUN useradd -m -u 1337 -s /bin/bash claude && \
 # Switch to non-root user
 USER claude
 
+# Create symlink for .ssh to persist in workspace volume
+RUN ln -sf /workspace/.ssh /home/claude/.ssh
+
 WORKDIR /workspace
 
 CMD ["claude"]
