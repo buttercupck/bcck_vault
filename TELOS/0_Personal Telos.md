@@ -37,3 +37,6 @@ P2. No self-trust or self-confidence
 - Drawing of a genie, inspired by Disney Alladin, and Bewitched aesthetics. 
 - Long-form, Short-form
 - We need things, yes but do we need all of it??
+
+## Goals:
+Win Pwn2Own

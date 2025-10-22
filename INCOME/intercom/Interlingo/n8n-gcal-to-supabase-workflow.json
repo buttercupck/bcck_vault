@@ -1,0 +1,347 @@
+{
+  "name": "Google Calendar to Supabase - Interlingo Jobs Sync",
+  "nodes": [
+    {
+      "parameters": {
+        "resource": "calendar",
+        "operation": "getAll",
+        "calendarId": {
+          "__rl": true,
+          "value": "primary",
+          "mode": "list",
+          "cachedResultName": "Primary"
+        },
+        "returnAll": false,
+        "limit": 50,
+        "options": {
+          "timeMin": "={{ $now.minus({ days: 1 }).toISO() }}",
+          "timeMax": "={{ $now.plus({ months: 3 }).toISO() }}"
+        }
+      },
+      "name": "Google Calendar - Get Events",
+      "type": "n8n-nodes-base.googleCalendar",
+      "typeVersion": 1,
+      "position": [250, 300],
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "YOUR_GOOGLE_CALENDAR_CREDENTIAL_ID",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "// Parse Google Calendar event into Interlingo format\nconst items = $input.all();\nconst output = [];\n\nfor (const item of items) {\n  const event = item.json;\n  \n  // Skip if no summary or already processed\n  if (!event.summary) continue;\n  \n  try {\n    // Parse Summary: \"LANGUAGE - MODALITY\"\n    const summaryParts = event.summary.split(' - ');\n    const language = summaryParts[0]?.trim() || 'Unknown';\n    let modality = summaryParts[1]?.trim() || 'Remote';\n    \n    // Normalize modality\n    if (modality.toUpperCase().includes('IN PERSON')) {\n      modality = 'In-Person';\n    } else if (modality.toUpperCase().includes('ZOOM')) {\n      modality = 'Remote';\n    } else if (modality.toUpperCase().includes('PHONE')) {\n      modality = 'Phone';\n    }\n    \n    // Parse Location (Organization)\n    const organization = event.location?.trim() || 'Unknown';\n    \n    // Parse Description into Client Requests\n    const clientRequests = [];\n    \n    if (event.description) {\n      const lines = event.description.split('\\n').map(l => l.trim()).filter(l => l);\n      \n      if (lines.length > 0) {\n        const clientName = lines[0]; // First line is client name\n        let currentRequest = null;\n        \n        for (let i = 1; i < lines.length; i++) {\n          const line = lines[i];\n          \n          // Check if line is a case number (format: CASENUM - PROGRAM)\n          if (line.includes(' - ')) {\n            // Save previous request if exists\n            if (currentRequest) {\n              clientRequests.push(currentRequest);\n            }\n            \n            const [caseNumber, program] = line.split(' - ').map(s => s.trim());\n            currentRequest = {\n              clientName,\n              caseNumber,\n              meetingType: program,\n              charges: []\n            };\n          }\n          // Check if line is a charge (format: NUMBER\\tCHARGE)\n          else if (line.match(/^\\d+\\s+/) && currentRequest) {\n            const charge = line.replace(/^\\d+\\s+/, '').trim();\n            currentRequest.charges.push(charge);\n          }\n        }\n        \n        // Add final request\n        if (currentRequest) {\n          clientRequests.push(currentRequest);\n        }\n      }\n    }\n    \n    // Combine charges into single string\n    clientRequests.forEach(req => {\n      req.charges = req.charges.join(', ');\n    });\n    \n    // Calculate duration in minutes\n    const startTime = new Date(event.start.dateTime || event.start.date);\n    const endTime = new Date(event.end.dateTime || event.end.date);\n    const duration = Math.round((endTime - startTime) / 1000 / 60);\n    \n    output.push({\n      json: {\n        // Original event data\n        calendarEventId: event.id,\n        calendarHtmlLink: event.htmlLink,\n        \n        // Parsed data\n        language,\n        modality,\n        organization,\n        startTime: event.start.dateTime || event.start.date,\n        endTime: event.end.dateTime || event.end.date,\n        duration,\n        timeZone: event.start.timeZone || 'America/Los_Angeles',\n        \n        // Client requests\n        clientRequests: clientRequests.length > 0 ? clientRequests : [{\n          clientName: 'Unknown',\n          caseNumber: null,\n          meetingType: null,\n          charges: null\n        }]\n      }\n    });\n    \n  } catch (error) {\n    // Log error but continue processing\n    console.error('Error parsing event:', event.id, error.message);\n  }\n}\n\nreturn output;"
+      },
+      "name": "Parse Calendar Events",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT id FROM languages WHERE name ILIKE '{{ $json.language }}' LIMIT 1;",
+        "options": {}
+      },
+      "name": "Lookup Language ID",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.4,
+      "position": [650, 300],
+      "credentials": {
+        "postgres": {
+          "id": "YOUR_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "-- Try to find organization by abbreviation or name\nSELECT id FROM organizations \nWHERE abbreviation ILIKE '{{ $json.organization }}'\n   OR name ILIKE '%{{ $json.organization }}%'\nLIMIT 1;",
+        "options": {}
+      },
+      "name": "Lookup Organization",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.4,
+      "position": [850, 300],
+      "credentials": {
+        "postgres": {
+          "id": "YOUR_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.id }}",
+              "operation": "exists"
+            }
+          ]
+        }
+      },
+      "name": "Organization Exists?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1050, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO organizations (name, abbreviation) \nVALUES (\n  '{{ $node[\"Parse Calendar Events\"].json.organization }} Municipal Court',\n  '{{ $node[\"Parse Calendar Events\"].json.organization }}'\n)\nRETURNING id;",
+        "options": {}
+      },
+      "name": "Create Organization",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.4,
+      "position": [1250, 450],
+      "credentials": {
+        "postgres": {
+          "id": "YOUR_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "-- Get or create location for this organization\nSELECT id FROM locations \nWHERE organization_id = '{{ $json.id }}'\nLIMIT 1;",
+        "options": {}
+      },
+      "name": "Lookup Location",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.4,
+      "position": [1450, 300],
+      "credentials": {
+        "postgres": {
+          "id": "YOUR_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.id }}",
+              "operation": "exists"
+            }
+          ]
+        }
+      },
+      "name": "Location Exists?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [1650, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "INSERT INTO locations (organization_id, name) \nVALUES (\n  '{{ $node[\"Lookup Organization\"].json.id || $node[\"Create Organization\"].json.id }}',\n  '{{ $node[\"Parse Calendar Events\"].json.organization }} Municipal Court'\n)\nRETURNING id;",
+        "options": {}
+      },
+      "name": "Create Location",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.4,
+      "position": [1850, 450],
+      "credentials": {
+        "postgres": {
+          "id": "YOUR_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "-- Insert commitment block\nINSERT INTO commitment_blocks (\n  start_time,\n  end_time,\n  duration,\n  modality,\n  status,\n  location_id,\n  interpreter_id\n) VALUES (\n  '{{ $node[\"Parse Calendar Events\"].json.startTime }}',\n  '{{ $node[\"Parse Calendar Events\"].json.endTime }}',\n  {{ $node[\"Parse Calendar Events\"].json.duration }},\n  '{{ $node[\"Parse Calendar Events\"].json.modality }}',\n  'initial',\n  '{{ $json.id }}',\n  NULL\n)\nRETURNING id;",
+        "options": {}
+      },
+      "name": "Create Commitment Block",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.4,
+      "position": [2050, 300],
+      "credentials": {
+        "postgres": {
+          "id": "YOUR_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "// Prepare client requests for insertion\nconst commitmentBlockId = $input.first().json.id;\nconst parsedData = $node[\"Parse Calendar Events\"].json;\nconst languageId = $node[\"Lookup Language ID\"].json.id;\n\nconst output = [];\n\nfor (const request of parsedData.clientRequests) {\n  output.push({\n    json: {\n      commitmentBlockId,\n      languageId,\n      clientName: request.clientName,\n      caseNumber: request.caseNumber,\n      meetingType: request.meetingType,\n      charges: request.charges\n    }\n  });\n}\n\nreturn output;"
+      },
+      "name": "Prepare Client Requests",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "-- Insert client request\nINSERT INTO client_requests (\n  commitment_block_id,\n  language_id,\n  client_name,\n  case_number,\n  meeting_type,\n  charges\n) VALUES (\n  '{{ $json.commitmentBlockId }}',\n  '{{ $json.languageId }}',\n  '{{ $json.clientName }}',\n  {{ $json.caseNumber ? \"'\" + $json.caseNumber + \"'\" : \"NULL\" }},\n  {{ $json.meetingType ? \"'\" + $json.meetingType + \"'\" : \"NULL\" }},\n  {{ $json.charges ? \"'\" + $json.charges + \"'\" : \"NULL\" }}\n)\nRETURNING id;",
+        "options": {}
+      },
+      "name": "Insert Client Requests",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.4,
+      "position": [2450, 300],
+      "credentials": {
+        "postgres": {
+          "id": "YOUR_SUPABASE_CREDENTIAL_ID",
+          "name": "Supabase PostgreSQL"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Google Calendar - Get Events": {
+      "main": [
+        [
+          {
+            "node": "Parse Calendar Events",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Calendar Events": {
+      "main": [
+        [
+          {
+            "node": "Lookup Language ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lookup Language ID": {
+      "main": [
+        [
+          {
+            "node": "Lookup Organization",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lookup Organization": {
+      "main": [
+        [
+          {
+            "node": "Organization Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Organization Exists?": {
+      "main": [
+        [
+          {
+            "node": "Lookup Location",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create Organization",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Organization": {
+      "main": [
+        [
+          {
+            "node": "Lookup Location",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lookup Location": {
+      "main": [
+        [
+          {
+            "node": "Location Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Location Exists?": {
+      "main": [
+        [
+          {
+            "node": "Create Commitment Block",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create Location",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Location": {
+      "main": [
+        [
+          {
+            "node": "Create Commitment Block",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Commitment Block": {
+      "main": [
+        [
+          {
+            "node": "Prepare Client Requests",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Client Requests": {
+      "main": [
+        [
+          {
+            "node": "Insert Client Requests",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-10-22T00:00:00.000Z",
+  "versionId": "1"
+}

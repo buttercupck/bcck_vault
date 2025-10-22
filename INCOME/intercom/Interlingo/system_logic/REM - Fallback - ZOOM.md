@@ -26,7 +26,7 @@ _These conditions must be met before the logic is executed. (Filter and Switch N
 *What happens when all conditions are met? What is the outcome?*
 The system composes and sends a customized email to remind the interpreter that they confirmed their assignment tomorrow.
 
-1. The system retrieves the [[TEMP-REM-Standard-Email]] for the `REM` category.
+1. The system retrieves the [[INCOME/intercom/Interlingo/assets/TEMP-REM-Standard-Email]] for the `REM` category.
 2. The system retrieves the specific instruction block for **ZOOM** from [[Standard Zoom Confirmation (Interpreter)]].
 3. The system inserts the standard Zoom instructions into the designated placeholder in the email template.
 4. The system populates the rest of the template with the `Commitment Block` and `Client Request` details.

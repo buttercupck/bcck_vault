@@ -26,7 +26,7 @@ Condition 3 (Dependencies): Court ZOOM approval
 ## Action
 *What happens when all conditions are met? What is the outcome?*
 The system composes and sends a customized email to the remind the interpreter that they confirmed their assignment tomorrow.
-1. The system retrieves the [[TEMP-REM-Standard-Email]] for the `REM` category.
+1. The system retrieves the [[INCOME/intercom/Interlingo/assets/TEMP-REM-Standard-Email]] for the `REM` category.
 2. The system identifies the **`Modality`** of the `Commitment Block` as **In Person**.
 3. The system retrieves the specific instruction block for **In Person** from [[Client Specifics - Puyallup Municipal Court|Client Specifics - Puyallup Municipal Court]]]
 4. The system inserts the organization-specific instructions into the designated placeholder in the email template.

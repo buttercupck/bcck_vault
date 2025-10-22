@@ -15,8 +15,8 @@ When the user invokes this command or says "Initiate the End", perform the compl
 Provide a comprehensive end-of-day review that:
 1. **Celebrates wins** - Build excitement for tomorrow
 2. **Captures knowledge** - Document what we learned
-3. **Syncs work** - Safe git commit with user approval
-4. **Archives report** - Insert report into today's Daily Note
+3.**Archives report** - Insert report into today's Daily Note
+4. **Syncs work** - Safe git commit with user approval
 5. **Sets next steps** - Clear direction for continuation
 
 ---
@@ -65,67 +65,14 @@ What I recommend doing next (as your AI assistant):
 [Leave blank space with prompt for user to fill in]
 
 **User: What are your thoughts on next steps?**
-
-### Step 3: Git Sync Workflow
-
-**IMPORTANT: Follow this sequence exactly**
-
-#### 3a. Check Git Status
-Run the following git commands in parallel:
-- `git status` - See all changes
-- `git diff` - See unstaged changes
-- `git diff --staged` - See staged changes
-- `git log -3 --oneline` - See recent commit style
-
-#### 3b. Analyze & Stage Changes
-- Review all modified, new, and deleted files
-- **DO NOT stage sensitive files** (.env, credentials, api_keys.md, etc.)
-- **VERIFY repository** - Run `git remote -v` to confirm we're in the correct repo
-- Stage appropriate files using `git add`
-
-#### 3c. Generate Commit Message
-Create a commit message that:
-- Follows this repository's commit style (from git log)
-- Accurately describes the changes (focus on "why" not just "what")
-- Is concise (1-2 sentences)
-- Ends with the standard attribution:
-
-```
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
-
-Co-Authored-By: Claude <noreply@anthropic.com>
-```
-
-#### 3d. Present for Approval
-**ASK THE USER:**
-"I've prepared this commit message. Does this accurately capture the work? Please approve or suggest changes:
-
-```
-[proposed commit message]
-```
-
-Type 'yes' to proceed, or provide an alternative message."
-
-#### 3e. Execute Commit
-**ONLY after user approval:**
-- Commit with the approved message using heredoc format
-- Run `git status` to verify commit success
-
-#### 3f. Completion Signal
-**After successful commit, clearly state:**
-
-✅ **Commit successful!**
-
-🔄 **You can now proceed with remotelySync to sync your Obsidian vault.**
-
-### Step 4: Archive Report in Daily Note
+### Step 3: Archive Report in Daily Note
 
 **IMPORTANT: Insert the end-of-day report into today's Daily Note**
 
-#### 4a. Determine Today's Date
+#### 3a. Determine Today's Date
 Run `date +%Y-%m-%d` to get today's date in YYYY-MM-DD format
 
-#### 4b. Locate or Create Daily Note
+#### 3b. Locate or Create Daily Note
 - Daily Note path: `/Users/itza/Documents/vault_self/bcck_vault/Daily Notes/YYYY-MM-DD.md`
 - If the file doesn't exist, create it with frontmatter:
 ```yaml
@@ -143,7 +90,7 @@ tags:
 
 ```
 
-#### 4c. Format the End-of-Day Report
+#### 3c. Format the End-of-Day Report
 Create a well-formatted report section with:
 ```markdown
 ---
@@ -186,7 +133,7 @@ Create a well-formatted report section with:
 ---
 ```
 
-#### 4d. Append to Daily Note
+#### 3d. Append to Daily Note
 **CRITICAL RULES:**
 1. ✅ **ALWAYS use Read tool FIRST** to read the existing Daily Note content
 2. ✅ **APPEND to the end** - Never overwrite existing content
@@ -207,10 +154,63 @@ Edit({
 })
 ```
 
-#### 4e. Confirm Insertion
+#### 3e. Confirm Insertion
 After inserting, state:
 
 ✅ **End-of-day report archived in Daily Note:** `Daily Notes/YYYY-MM-DD.md`
+
+### Step 4: Git Sync Workflow
+
+**IMPORTANT: Follow this sequence exactly**
+
+#### 4a. Check Git Status
+Run the following git commands in parallel:
+- `git status` - See all changes
+- `git diff` - See unstaged changes
+- `git diff --staged` - See staged changes
+- `git log -3 --oneline` - See recent commit style
+
+#### 4b. Analyze & Stage Changes
+- Review all modified, new, and deleted files
+- **DO NOT stage sensitive files** (.env, credentials, api_keys.md, etc.)
+- **VERIFY repository** - Run `git remote -v` to confirm we're in the correct repo
+- Stage appropriate files using `git add`
+
+#### 4c. Generate Commit Message
+Create a commit message that:
+- Follows this repository's commit style (from git log)
+- Accurately describes the changes (focus on "why" not just "what")
+- Is concise (1-2 sentences)
+- Ends with the standard attribution:
+
+```
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude <noreply@anthropic.com>
+```
+
+#### 4d. Present for Approval
+**ASK THE USER:**
+"I've prepared this commit message. Does this accurately capture the work? Please approve or suggest changes:
+
+```
+[proposed commit message]
+```
+
+Type 'yes' to proceed, or provide an alternative message."
+
+#### 4e. Execute Commit
+**ONLY after user approval:**
+- Commit with the approved message using heredoc format
+- Run `git status` to verify commit success
+
+#### 4f. Completion Signal
+**After successful commit, clearly state:**
+
+✅ **Commit successful!**
+
+🔄 **You can now proceed with remotelySync to sync your Obsidian vault.**
+
 
 ---
 
