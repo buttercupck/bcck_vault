@@ -1,0 +1,108 @@
+🎯 ALTERNATE HTTP PORT TESTING GUIDE
+===================================
+
+Priority: Test these BEFORE standard XSS testing
+Why: Alt ports often have debug/admin interfaces with weaker security
+
+---
+
+🔴 CRITICAL - Test These First
+-------------------------------
+
+1. qa.growthgrader.hubspot.com:8080
+   URL: http://qa.growthgrader.hubspot.com:8080
+   Why: QA environment + non-standard port = goldmine
+   Test for:
+   - Debug endpoints (/debug, /admin, /status)
+   - Exposed API documentation (/api/docs, /swagger)
+   - Development tools (/phpinfo, /server-status)
+   - XSS in any found parameters
+
+2. qa.growthgrader.hubspot.com:8443  
+   URL: https://qa.growthgrader.hubspot.com:8443
+   Why: Same QA environment on alt HTTPS
+   Test for: Same as above
+
+3. developers.hubspot.com:8080
+   URL: http://developers.hubspot.com:8080
+   Why: Developer portal may have API playground/sandbox
+   Test for:
+   - API testing interfaces
+   - Code execution playgrounds
+   - XSS in code editor/preview
+
+4. developers.hubspot.com:8443
+   URL: https://developers.hubspot.com:8443
+   Why: Alt HTTPS on developer portal
+   Test for: Same as above
+
+---
+
+🟠 HIGH PRIORITY - Test Next
+-----------------------------
+
+5. api.hubspot.com:8080
+6. api.hubspot.com:8443
+7. api-na1.hubspot.com:8080
+8. api-na1.hubspot.com:8443
+
+Test for:
+- API documentation pages
+- GraphQL playgrounds
+- REST API explorers
+- Parameter reflection in JSON responses
+
+---
+
+🟡 MEDIUM PRIORITY
+-------------------
+
+9-18. Remaining sites.hubspot.com subdomains on :8080/:8443
+   (clarkecorp, daviesmolding, ideapioneermedia, localtrifecta)
+
+---
+
+TESTING CHECKLIST (Per Port)
+=============================
+
+Step 1: Access Check
+[ ] Visit http://[subdomain]:[port]
+[ ] Visit https://[subdomain]:[port]
+[ ] Take screenshot if accessible
+[ ] Document what's running (error page? app? redirect?)
+
+Step 2: Common Debug Paths
+[ ] /admin
+[ ] /debug
+[ ] /status
+[ ] /health
+[ ] /metrics
+[ ] /api/docs
+[ ] /swagger
+[ ] /graphql
+[ ] /phpinfo.php
+[ ] /server-status
+[ ] /.env
+
+Step 3: XSS Testing (if any input found)
+[ ] URL parameters: ?q=<script>alert(1)</script>
+[ ] Search boxes: "><img src=x onerror=alert(1)>
+[ ] API parameters: {"test":"<svg/onload=alert(1)>"}
+
+Step 4: Information Disclosure
+[ ] Check for version numbers
+[ ] Look for internal IPs
+[ ] Check for API keys in responses
+[ ] Look for stack traces
+
+---
+
+IMMEDIATE ACTION
+================
+
+Open your browser and test:
+1. http://qa.growthgrader.hubspot.com:8080
+2. https://qa.growthgrader.hubspot.com:8443
+
+Document what you find before testing further.
+

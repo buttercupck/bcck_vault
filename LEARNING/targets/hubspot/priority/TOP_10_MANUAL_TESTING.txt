@@ -1,0 +1,53 @@
+🎯 HubSpot Bug Bounty - TOP 10 TARGETS FOR XSS TESTING
+======================================================
+
+🔴 CRITICAL PRIORITY (Test These First!)
+----------------------------------------
+1. exceptions.hubspot.com
+   Purpose: Error reporting endpoint (from source code analysis)
+   Attack: XSS in error messages, stack traces, debug output
+   URLs to test:
+   - https://exceptions.hubspot.com
+   - https://exceptions.hubspot.com?error=<script>alert(1)</script>
+   - https://exceptions.hubspot.com?msg="><img src=x onerror=alert(1)>
+   
+2. qa.growthgrader.hubspot.com
+   Purpose: QA/testing environment (from source code analysis)
+   Attack: All XSS vectors, auth bypass
+   URLs to test:
+   - https://qa.growthgrader.hubspot.com
+   - https://qa.growthgrader.hubspot.com?q=<svg/onload=alert(1)>
+
+3. community-stage.hubspot.com ⚠️ 401 Auth Required
+   Purpose: Staging environment
+   Attack: Default creds first, then XSS if accessible
+   Creds to try: admin/admin, admin/password, hubspot/hubspot
+
+🟠 HIGH PRIORITY (Tier 1)
+-------------------------
+4. api.hubspot.com
+   Attack: XSS in API parameters, JSON injection
+   
+5. api-na1.hubspot.com
+   Attack: Same as api.hubspot.com
+
+6. developers.hubspot.com (200 OK - Active!)
+   Attack: Search, code playground, documentation XSS
+
+7. developers-web1-hubspot.sites.hubspot.com
+   Attack: Same as developers.hubspot.com
+
+🟡 MEDIUM PRIORITY (Tier 2)
+---------------------------
+8. academy.hubspot.com (200 OK - Active!)
+   Attack: Course search, profile, user-generated content
+
+9. blog.hubspot.com (200 OK - Active!)
+   Attack: Search, comments, share functionality
+
+10. ecosystem.hubspot.com (200 OK - Active!)
+    Attack: App search, descriptions, marketplace review
+
+========================================================
+NEXT ACTION: Start manual browser testing on Target #1
+========================================================

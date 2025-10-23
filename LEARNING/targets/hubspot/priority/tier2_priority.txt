@@ -1,0 +1,3 @@
+mail.hubspot.com
+o1.mail.onboarding.hubspot.com
+o72.authemail.hubspot.com
