@@ -9,8 +9,8 @@ ctx = ssl.create_default_context()
 ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
 
-# Read presence_headers.md
-headers_file = '/Users/itza/Documents/vault_self/bcck_vault/LEARNING/targets/hubspot/presence_headers.md'
+# Read headers.md
+headers_file = '/Users/itza/Documents/vault_self/bcck_vault/LEARNING/targets/hubspot/headers.md'
 
 print("="*70)
 print("TRACK B: PRESENCE API - IDOR & AUTHENTICATION TESTING")

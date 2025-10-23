@@ -9,8 +9,8 @@ ctx = ssl.create_default_context()
 ctx.check_hostname = False
 ctx.verify_mode = ssl.CERT_NONE
 
-# Read graphql_headers.md
-headers_file = '/Users/itza/Documents/vault_self/bcck_vault/LEARNING/targets/hubspot/graphql_headers.md'
+# Read headers.md
+headers_file = '/Users/itza/Documents/vault_self/bcck_vault/LEARNING/targets/hubspot/graphql/headers.md'
 
 print("="*70)
 print("TRACK A: GRAPHQL TESTING WITH CAPTURED HEADERS")
@@ -20,7 +20,7 @@ with open(headers_file, 'r') as f:
     content = f.read()
 
 # Extract components
-print("\n[PARSING graphql_headers.md]")
+print("\n[PARSING headers.md]")
 
 # Extract URL from first line
 url_match = re.search(r'POST ([^\s]+) HTTP', content)
